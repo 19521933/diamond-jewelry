@@ -1,0 +1,262 @@
+.bootstrap {
+	margin-top: 75px;
+	margin-bottom: 25px;
+}
+
+.bootstrap .body {
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		"Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+		"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #212529;
+	text-align: left;
+	background-color: #fff;
+}
+
+.bootstrap body {
+	background: #f7f7ff;
+	margin-top: 100px;
+}
+
+.bootstrap *,
+::after,
+::before {
+	box-sizing: border-box;
+}
+
+.bootstrap .div {
+	display: block;
+}
+
+.bootstrap .card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	word-wrap: break-word;
+	background-color: #fff;
+	background-clip: border-box;
+	border: 0 solid transparent;
+	border-radius: 0.25rem;
+	margin-bottom: 1.5rem;
+	box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%),
+		0 2px 6px 0 rgb(206 206 238 / 54%);
+}
+
+.bootstrap .card-body {
+	-ms-flex: 1 1 auto;
+	flex: 1 1 auto;
+	min-height: 1px;
+	padding: 1.25rem;
+	height: 500px;
+}
+
+.bootstrap .me-2 {
+	margin-right: 0.5rem !important;
+}
+
+.bootstrap .mb-0,
+.my-0 {
+	margin-bottom: 0 !important;
+}
+
+.bootstrap .h6,
+h6 {
+	font-size: 1rem;
+}
+
+.bootstrap .h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin-bottom: 0.5rem;
+	font-weight: 500;
+	line-height: 1.2;
+}
+
+.bootstrap h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin-top: 0;
+	margin-bottom: 0.5rem;
+}
+
+.bootstrap .form-control {
+	display: block;
+	width: 100%;
+	height: calc(1.5em + 1.75rem + 2px);
+	padding: 0.375rem 0.75rem;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #495057;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+	border-radius: 0.25rem;
+	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.bootstrap button,
+input {
+	overflow: visible;
+}
+
+.bootstrap button,
+input,
+optgroup,
+select,
+textarea {
+	margin: 0;
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+
+.bootstrap .card-body {
+	-ms-flex: 1 1 auto;
+	flex: 1 1 auto;
+	min-height: 1px;
+	padding: 1.25rem;
+}
+
+.bootstrap *,
+::after,
+::before {
+	box-sizing: border-box;
+}
+
+.bootstrap .text-center {
+	text-align: center !important;
+}
+
+.bootstrap .align-items-center {
+	-ms-flex-align: center !important;
+	align-items: center !important;
+}
+
+.bootstrap .flex-column {
+	-ms-flex-direction: column !important;
+	flex-direction: column !important;
+}
+
+.bootstrap .d-flex {
+	display: -ms-flexbox !important;
+	display: flex !important;
+}
+
+.bootstrap .p-1 {
+	padding: 0.25rem !important;
+}
+
+.bootstrap .rounded-circle {
+	border-radius: 50% !important;
+}
+
+.bootstrap .bg-primary {
+	background-color: #57a6be !important;
+}
+
+.bootstrap img {
+	vertical-align: middle;
+	border-style: none;
+}
+
+.bootstrap .mt-3,
+.my-3 {
+	margin-top: 1rem !important;
+}
+
+.bootstrap .list-group-flush > .list-group-item {
+	border-width: 0 0 1px;
+}
+
+.bootstrap .list-group-item:first-child {
+	border-top-left-radius: inherit;
+	border-top-right-radius: inherit;
+}
+
+.bootstrap .align-items-center {
+	-ms-flex-align: center !important;
+	align-items: center !important;
+}
+
+.bootstrap .justify-content-between {
+	-ms-flex-pack: justify !important;
+	justify-content: space-between !important;
+}
+
+.bootstrap .flex-wrap {
+	-ms-flex-wrap: wrap !important;
+	flex-wrap: wrap !important;
+}
+
+.bootstrap .d-flex {
+	display: -ms-flexbox !important;
+	display: flex !important;
+}
+
+.bootstrap .list-group-item {
+	position: relative;
+	display: block;
+	padding: 0.75rem 1.25rem;
+	background-color: #fff;
+	border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.bootstrap .text-secondary {
+	color: #57a6be !important;
+}
+
+.bootstrap .btn:not(:disabled):not(.disabled) {
+	cursor: pointer;
+}
+
+.bootstrap [type="button"]:not(:disabled),
+[type="reset"]:not(:disabled),
+[type="submit"]:not(:disabled),
+button:not(:disabled) {
+	cursor: pointer;
+}
+
+.bootstrap .pl-4,
+.px-4 {
+	padding-left: 1.5rem !important;
+}
+
+.bootstrap .pr-4,
+.px-4 {
+	padding-right: 1.5rem !important;
+}
+
+.bootstrap .btn-primary {
+	color: #fff;
+	background-color: #57a6be;
+	border-color: #57a6be;
+}
+
+.bootstrap .info {
+	flex: 0 2 20%;
+	max-width: 25%;
+	/* align-items: center; */
+	justify-content: center;
+	padding-top: 14px;
+}
+
+.bootstrap .changes-button {
+	margin-top: 4px;
+}
