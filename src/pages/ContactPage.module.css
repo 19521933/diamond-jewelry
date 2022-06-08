@@ -1,40 +1,48 @@
-.contact h3 {
+h3 {
     text-align: left;
-    color: #46CFBE;
+    color:#46CFBE;
+    margin-bottom: 12px;
 }
-
-.contact h2 {
+h2 {
     text-align: center;
-    color: #46CFBE;
+    color:#46CFBE;
+    font-family: 'Font Awesome 5 Brands';
 }
 
 .item {
     font-size: 14px;
 }
-
 .item button {
     background-image: linear-gradient(#31ffe5, #23685f);
     font-size: 18px;
-    color: white;
+    color:white;
     padding: 10px 15px;
     min-width: 400px;
     text-align: left;
     border: none;
-    box-shadow: 5px 10px rgba(192, 191, 191, 0.784);
+    box-shadow: 5px 10px rgba(192, 191, 191, 0.784) ;
+    font-family: 'Font Awesome 5 Brands';
 }
-
 .item p {
     margin: 20px 0px;
+    font-family: 'Font Awesome 5 Brands';
+    font-size: 17px;
 }
-
 .contact {
-    margin: 30px 60px;
+    margin : 30px 60px;
 
 }
 
 .hr {
     height: 15px;
     background-image: linear-gradient(#31ffe5, #23685f);
-    ;
     margin: 20px 0px;
+}
+
+.title{
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    color: #000;
+    margin-left: 5px;
 }
