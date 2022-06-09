@@ -18,15 +18,15 @@ export default function ContactPage() {
             <div className={styles.item}>
               <button>Trang trợ giúp </button>
               <p>
-                Để biết thông tin và được hỗ trợ với các câu hỏi về Fantasy
-                League, vui lòng truy cập ....
+                Để biết thông tin và được hỗ trợ với các câu hỏi về DiamoundJewelry
+                League, vui lòng truy cập <a className={styles.title} href="https://www.facebook.com/10keycery">Diamoundjewelry.com</a>
               </p>
             </div>
           </div>
           <div className={styles.item}>
             <button>Thắc mắc chung</button>
             <p>
-              Vui lòng liên hệ .... nếu có bất kỳ thắc mắc nào liên quan đến sản
+              Vui lòng liên hệ <a className={styles.title} href="https://www.facebook.com/10keycery">DiamoundJewelry@gmail.com</a> nếu có bất kỳ thắc mắc nào liên quan đến sản
               phẩm và chất lượng đến từ công ty cổ phần trang sức DIAMOND
               JEWELRY.{" "}
             </p>

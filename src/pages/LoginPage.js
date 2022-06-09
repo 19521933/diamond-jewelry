@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import localStorage from 'localStorage';
-import OAuth2Login from 'react-simple-oauth2-login';
+// import OAuth2Login from 'react-simple-oauth2-login';
+import Navbar from '../components/Navbar';
 import styles from './LoginPage.module.css';
 
 export default function Login() {
@@ -16,47 +17,51 @@ export default function Login() {
     }
 
     return (
+        <>
+        <Navbar/>
         <div className={styles.container}>
-            <div className={styles.wrapper}>
-                <form>
-                    <h1>Đăng nhập</h1>
-                    <input type='text' placeholder='Số điện thoại hoặc email' required />
-                    <input type='password' placeholder='Mật khẩu' required />
-                    <Link className={styles.forgot_password} to="/quen-mat-khau">Quên mật khẩu?</Link>
-                    <br></br>
-                    <button className={styles.login_button} type="submit">Đăng nhập</button>
-                    <p>
-                        Chưa có tài khoản?
-                        <Link className={styles.register} to="/dang-ki"> Đăng kí ngay</Link>
-                    </p>
-                    <div className={styles.third_party_wrapper}>
-                        <OAuth2Login
-                            className={styles.button}
-                            authorizationUrl="https://accounts.google.com/o/oauth2/auth"
-                            responseType="token"
-                            clientId="633817129267-8ve3g3uk7mhsrdd0elci28as9g7389sr.apps.googleusercontent.com"
-                            redirectUri="http://localhost:3000/auth/google/diamonjewelry"
-                            scope="profile"
-                            onSuccess={onSuccess}
-                            onFailure={onFailure}
-                        >
-                            <img src={require("../assets/images/google.png")} alt="google-icon" />
-                        </OAuth2Login>
-                        <OAuth2Login
-                            className={styles.button}
-                            authorizationUrl="https://www.facebook.com/dialog/oauth"
-                            responseType="token"
-                            clientId="5374491585936093"
-                            redirectUri="http://localhost:3000/auth/facebook/diamonjewelry"
-                            scope="public_profile"
-                            onSuccess={onSuccess}
-                            onFailure={onFailure}
-                        >
-                            <img src={require("../assets/images/facebook.png")} alt="facebook-icon" />
-                        </OAuth2Login>
+        <div className={styles.wrapper}>
+            <form>
+                <h1>Đăng nhập</h1>
+                <input type='text' placeholder='Số điện thoại hoặc email' />
+                <input type='password' placeholder='****************************************' />
+                <div className={styles.forgotpassword} to="/quen-mat-khau">Quên mật khẩu?</div>
+                <br></br>
+                <button className={styles.loginbutton} type="submit">Đăng nhập</button>
+                <p className={styles.title}>
+                    Chưa có tài khoản?
+                    <Link className={styles.title} to="/dang-ki"> Đăng kí ngay</Link>
+                </p>
+                <div className={styles.thirdpartywrapper}>
+                    <div
+                        className={styles.button}
+                        responseType="token"
+                        redirectUri="http://localhost:3000/auth/google/diamonjewelry"
+                        scope="profile"
+                    >
+                        <img className={styles.icon} src={require("../assets/images/google.png")} alt="google-icon" />
                     </div>
-                </form>
-            </div>
+                    <div
+                        className={styles.button}
+                        responseType="token"
+                        redirectUri="http://localhost:3000/auth/facebook/diamonjewelry"
+                        scope="public_profile"
+                    >
+                        <img className={styles.icon} src={require("../assets/images/facebook.png")} alt="facebook-icon" />
+                    </div>
+
+                    <div
+                        className={styles.button}
+                        responseType="token"
+                        redirectUri="http://localhost:3000/auth/facebook/diamonjewelry"
+                        scope="public_profile"
+                    >
+                        <img className={styles.icon} src={require("../assets/images/instagram.png")} alt="facebook-icon" />
+                    </div>
+                </div>
+            </form>
         </div>
+    </div>
+    </>
     );
 }
