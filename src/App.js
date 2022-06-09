@@ -11,6 +11,14 @@ import GiftPage from './pages/GiftPage';
 import JewelryPage from './pages/JewelryPage';
 import WatchPage from './pages/WatchPage';
 import ProfilePage from './pages/ProfilePage';
+import { productInputs, userInputs } from "./formSource";
+import "./style/dark.css";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import UserList from "./pages/UserList";
+import AdminProductList from "./pages/AdminProductList";
+import Single from "./pages/Single";
+import New from "./pages/New";
 
 function App() {
 	return (
@@ -28,6 +36,26 @@ function App() {
 				<Route path="/qua-tang" element={<GiftPage />} />
 				<Route path="/san-pham" element={<Product />} />
 				<Route path="/tai-khoan" element={<ProfilePage />} />
+				<Route path="/admin">
+					<Route index element={<Home />} />
+					<Route path="login" element={<Login />} />
+					<Route path="users">
+						<Route index element={<UserList />} />
+						<Route path=":userId" element={<Single />} />
+						<Route
+							path="new"
+							element={<New inputs={userInputs} title="Quản Lý Khách Hàng:" />}
+						/>
+					</Route>
+					<Route path="products">
+						<Route index element={<AdminProductList />} />
+						<Route path=":productId" element={<Single />} />
+						<Route
+							path="new"
+							element={<New inputs={productInputs} title="Quản Lý Sản Phẩm:" />}
+						/>
+					</Route>
+				</Route>
 			</Routes>
 		</Router>
 	);
