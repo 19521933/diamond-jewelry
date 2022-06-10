@@ -5,7 +5,6 @@ import Navbar from '../components/Navbar'
 import Newsletter from '../components/Newsletter';
 import JewelryPageProducts from '../components/JewelryPageProducts';
 import styles from "./JewelryPage.module.css"
-import ReactPagination from '../components/Pagination';
 
 const JewelryPage = () => {
 
@@ -66,7 +65,6 @@ const JewelryPage = () => {
                 </div>
             </div>
             <JewelryPageProducts />
-            <ReactPagination />
             <Newsletter />
             <Footer />
         </div>
