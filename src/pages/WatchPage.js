@@ -5,7 +5,6 @@ import Navbar from '../components/Navbar'
 import Newsletter from '../components/Newsletter';
 import WatchPageProducts from '../components/WatchPageProducts';
 import styles from "./WatchPage.module.css"
-import ReactPagination from '../components/Pagination';
 
 const WatchPage = () => {
     return (
@@ -60,7 +59,6 @@ const WatchPage = () => {
                 </div>
             </div>
             <WatchPageProducts />
-            <ReactPagination />
             <Newsletter />
             <Footer />
         </div>

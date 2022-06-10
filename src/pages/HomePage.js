@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import styles from './HomePage.module.css';
 import Products from '../components/Products.js';
-import Pagination from '../components/Pagination';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
@@ -64,7 +63,6 @@ export default function HomePage() {
                 <div className={styles.product_container}>
                     <Products></Products>
                 </div>
-                <Pagination></Pagination>
             </section>
 
             <div className={ styles.contact }>
