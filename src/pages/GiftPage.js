@@ -1,7 +1,7 @@
 import React from 'react'
 import Announcement from '../components/Announcement'
 import Footer from '../components/Footer';
-import Navbar from '../components/Navbar'
+import Header from '../components/Header'
 import Newsletter from '../components/Newsletter';
 import GiftPageProducts from '../components/GiftPageProducts';
 import styles from "./GiftPage.module.css"
@@ -9,7 +9,7 @@ import styles from "./GiftPage.module.css"
 const GiftPage = () => {
     return (
         <div className={styles.Container}>
-            <Navbar />
+            <Header />
             <Announcement />
             <h1 className={styles.Title}>Gift Page</h1>
             <div className={styles.FilterContainer}>
