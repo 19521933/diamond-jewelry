@@ -58,7 +58,6 @@ export default function HomePage() {
             </div>
 
             <section className={styles.product_section}>
-                <h1>Các Sản Phẩm <span>Nổi Bật</span></h1>
                 <img src={require("../assets/images/diamond.png")} alt="diamond" />
                 <div className={styles.product_container}>
                     <Products></Products>
