@@ -1,16 +1,16 @@
-.Container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 20px 10px;
-
+.Container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding: 20px 10px;
 }
+
 .Title {
-justify-content: center;
-font-size: 45px;
-text-align: center;
-font-weight: bold;
-margin-top: 40px;
-margin-bottom: 20px;
-color: #59a8a9;
+	justify-content: center;
+	font-size: 45px;
+	text-align: center;
+	font-weight: bold;
+	margin-top: 40px;
+	margin-bottom: 20px;
+	color: #59a8a9;
 }
