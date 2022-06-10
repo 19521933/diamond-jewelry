@@ -1,14 +1,14 @@
 import React from 'react'
 import Announcement from '../components/Announcement'
 import Footer from '../components/Footer'
-import Navbar from '../components/Navbar'
+import Header from '../components/Header'
 import Newsletter from '../components/Newsletter'
 import { Add, Remove } from "@material-ui/icons";
 import styles from "./Product.module.css"
 const Product = () => {
   return (
     <div className={styles.Container}>
-      <Navbar />
+      <Header />
       <Announcement />
 
       <div className={styles.WrapperContainer}>

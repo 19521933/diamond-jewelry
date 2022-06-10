@@ -1,7 +1,7 @@
 import React from 'react'
 import Announcement from '../components/Announcement'
 import Footer from '../components/Footer';
-import Navbar from '../components/Navbar'
+import Header from '../components/Header'
 import Newsletter from '../components/Newsletter';
 import WatchPageProducts from '../components/WatchPageProducts';
 import styles from "./WatchPage.module.css"
@@ -9,7 +9,7 @@ import styles from "./WatchPage.module.css"
 const WatchPage = () => {
     return (
         <div className={styles.Container}>
-            <Navbar />
+            <Header />
             <Announcement />
             <h1 className={styles.Title}>Trang Đồng Hồ</h1>
             <div className={styles.FilterContainer}>

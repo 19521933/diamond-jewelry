@@ -1,7 +1,7 @@
 import React from 'react'
 import Announcement from '../components/Announcement'
 import Footer from '../components/Footer';
-import Navbar from '../components/Navbar'
+import Header from '../components/Header'
 import Newsletter from '../components/Newsletter';
 import JewelryPageProducts from '../components/JewelryPageProducts';
 import styles from "./JewelryPage.module.css"
@@ -10,7 +10,7 @@ const JewelryPage = () => {
 
     return (
         <div className={styles.Container}>
-            <Navbar />
+            <Header />
             <Announcement />
             <h1 className={styles.Title}>Trang Sức</h1>
             <div className={styles.FilterContainer}>

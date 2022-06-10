@@ -1,7 +1,7 @@
 import React from 'react'
 import Announcement from '../components/Announcement'
 import Footer from '../components/Footer';
-import Navbar from '../components/Navbar'
+import Header from '../components/Header'
 import Newsletter from '../components/Newsletter';
 import Products from '../components/Products';
 import "./ProductList.css"
@@ -9,7 +9,7 @@ import "./ProductList.css"
 const ProductList = () => {
   return (
     <div className="Container-ProductList">
-      <Navbar/>
+      <Header/>
       <Announcement/>
       <h1 className="Title-ProductList">Rings</h1>
       <div className="FilterContainer">

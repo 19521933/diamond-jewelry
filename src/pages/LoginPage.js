@@ -1,6 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
 // import OAuth2Login from 'react-simple-oauth2-login';
-import Navbar from '../components/Navbar';
 import styles from './LoginPage.module.css';
 import ls from 'local-storage';
 import $ from 'jquery';
@@ -46,53 +45,50 @@ export default function Login() {
 	}
 
 	return (
-		<>
-			<Navbar />
-			<div className={styles.container}>
-				<div className={styles.wrapper}>
-					<form onSubmit={handleFormSubmit}>
-						<h1>Đăng nhập</h1>
-						<input type='email' placeholder='Email' required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" />
-						<p className={styles.email_error_message}></p>
-						<input type='password' placeholder='Mât khẩu' required />
-						<p className='password_error_message'></p>
-						<div className={styles.forgotpassword} to="/quen-mat-khau">Quên mật khẩu?</div>
-						<br></br>
-						<button className={styles.loginbutton} type="submit">Đăng nhập</button>
-						<p className={styles.title}>
-							Chưa có tài khoản?
-							<Link className={styles.title} to="/dang-ki"> Đăng kí ngay</Link>
-						</p>
-						<div className={styles.thirdpartywrapper}>
-							<div
-								className={styles.button}
-								responseType="token"
-								redirectUri="http://localhost:3000/auth/google/diamonjewelry"
-								scope="profile"
-							>
-								<img className={styles.icon} src={require("../assets/images/google.png")} alt="google-icon" />
-							</div>
-							<div
-								className={styles.button}
-								responseType="token"
-								redirectUri="http://localhost:3000/auth/facebook/diamonjewelry"
-								scope="public_profile"
-							>
-								<img className={styles.icon} src={require("../assets/images/facebook.png")} alt="facebook-icon" />
-							</div>
-
-							<div
-								className={styles.button}
-								responseType="token"
-								redirectUri="http://localhost:3000/auth/facebook/diamonjewelry"
-								scope="public_profile"
-							>
-								<img className={styles.icon} src={require("../assets/images/instagram.png")} alt="facebook-icon" />
-							</div>
+		<div className={styles.container}>
+			<div className={styles.wrapper}>
+				<form onSubmit={handleFormSubmit}>
+					<h1>Đăng nhập</h1>
+					<input type='email' placeholder='Email' required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" />
+					<p className={styles.email_error_message}></p>
+					<input type='password' placeholder='Mât khẩu' required />
+					<p className='password_error_message'></p>
+					<div className={styles.forgotpassword} to="/quen-mat-khau">Quên mật khẩu?</div>
+					<br></br>
+					<button className={styles.loginbutton} type="submit">Đăng nhập</button>
+					<p className={styles.title}>
+						Chưa có tài khoản?
+						<Link className={styles.title} to="/dang-ki"> Đăng kí ngay</Link>
+					</p>
+					<div className={styles.thirdpartywrapper}>
+						<div
+							className={styles.button}
+							responseType="token"
+							redirectUri="http://localhost:3000/auth/google/diamonjewelry"
+							scope="profile"
+						>
+							<img className={styles.icon} src={require("../assets/images/google.png")} alt="google-icon" />
 						</div>
-					</form>
-				</div>
+						<div
+							className={styles.button}
+							responseType="token"
+							redirectUri="http://localhost:3000/auth/facebook/diamonjewelry"
+							scope="public_profile"
+						>
+							<img className={styles.icon} src={require("../assets/images/facebook.png")} alt="facebook-icon" />
+						</div>
+
+						<div
+							className={styles.button}
+							responseType="token"
+							redirectUri="http://localhost:3000/auth/facebook/diamonjewelry"
+							scope="public_profile"
+						>
+							<img className={styles.icon} src={require("../assets/images/instagram.png")} alt="facebook-icon" />
+						</div>
+					</div>
+				</form>
 			</div>
-		</>
+		</div>
 	);
 }
