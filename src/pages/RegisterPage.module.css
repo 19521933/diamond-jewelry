@@ -1,96 +1,127 @@
 .container {
-    background: url('../assets/images/login-background.png');
-    background-size: cover;
-    padding: 50px;
-    display: flex;
-    flex-direction: column;
-    flex-flow: row-reverse;
-    justify-content: space-around;
-    text-align: center;
-    height: calc(100vh - 100px);
+	background: url('../assets/images/login-background.png');
+	background-size: cover;
+	padding: 50px;
+	display: flex;
+	flex-direction: column;
+	flex-flow: row-reverse;
+	justify-content: space-around;
+	text-align: center;
+	height: calc(100vh - 100px);
 }
 
 .banner {
-    width: 50%;
-    height: 60%;
-    background: url('../assets/images/signuppage.jpg') no-repeat;
-    background-size: cover;
-    text-align: center;
-    margin: auto 20px;
-    align-items: center;
-
-
+	width: 50%;
+	height: 60%;
+	background: url('../assets/images/signuppage.jpg') no-repeat;
+	background-size: cover;
+	text-align: center;
+	margin: auto 20px;
+	align-items: center;
 }
 
 .back_button {
-    color: white;
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    cursor: pointer;
+	color: white;
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	cursor: pointer;
 }
 
 .wrapper {
-    border: 1px solid #707070;
-    border-radius: 25px;
-    background-color: #CEE7E5;
-    display: inline-block;
-    padding: 50px 50px;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 400px;
+	border: 1px solid #707070;
+	border-radius: 25px;
+	background-color: #cee7e5;
+	display: inline-block;
+	padding: 50px 50px;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 400px;
 }
 
 .container form h1 {
-    color: #6CB0C5;
-    margin-top: 0;
+	color: #6cb0c5;
+	margin-top: 0;
 }
 
 .container form input {
-    display: block;
-    border: none;
-    border-radius: 5px;
-    margin-left: auto;
-    margin-right: auto;
-    width: calc(100% - 20px);
-    margin-bottom: 15px;
-    padding: 10px;
+	display: block;
+	border: none;
+	border-radius: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	width: calc(100% - 20px);
+	margin-bottom: 15px;
+	padding: 10px;
 }
 
 .container a {
-    text-decoration: none;
+	text-decoration: none;
 }
 
 .forgot_password {
-    float: right;
+	float: right;
 }
 
 .signup_button {
-    color: white;
-    background-color: #6CB0C5;
-    border: none;
-    border-radius: 18px;
-    width: 100%;
-    padding: 10px;
-    font-size: 15px;
-    font-weight: bold;
-    margin: 20px 0px;
+	color: white;
+	background-color: #6cb0c5;
+	border: none;
+	border-radius: 18px;
+	width: 100%;
+	padding: 10px;
+	font-size: 15px;
+	font-weight: bold;
+	margin: 20px 0px;
 }
 
 .third_party_wrapper {
-    display: flex;
-    justify-content: space-evenly;
+	display: flex;
+	justify-content: space-evenly;
 }
 
 .third_party_wrapper button {
-    background-color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: large;
-    padding: 12px 20px 7px;
+	background-color: white;
+	border: none;
+	border-radius: 10px;
+	font-size: large;
+	padding: 12px 20px 7px;
 }
 
 .third_party_wrapper button img {
-    width: 20px;
+	width: 20px;
 }
+
+.success_popup {
+	background-color: #fff;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	border: 1px solid black;
+    padding: 10px;
+}
+
+.close_button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+}
+
+.error_popup {
+	background-color: #fff;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	border: 1px solid black;
+    padding: 10px;
+}
+
+.hide {
+	display: none;
+}
+
+.error_message {}

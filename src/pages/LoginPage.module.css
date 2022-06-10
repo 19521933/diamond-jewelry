@@ -89,3 +89,6 @@
     font-family: 'Font Awesome 5 Brands';
     opacity: 90%;
 }
+
+.email_error_message {}
+.password_error_message {}

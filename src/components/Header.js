@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import localStorage from 'localStorage';
+import ls from 'local-storage';
 import styles from './Header.module.css';
 import Navbar from './Navbar.js';
 
@@ -7,7 +7,7 @@ export default function Header() {
     const navigate = useNavigate();
 
     function handleLogout() {
-        localStorage.removeItem("access_token");
+        ls.remove("access_token");
         navigate("/");
     }
 
@@ -26,7 +26,7 @@ export default function Header() {
                 </ul>
                 <ul className={styles.right}>
                     {
-                        localStorage.getItem("access_token") ? 
+                        ls.get("access_token") ? 
                         <li>
                             <ion-icon name="log-in-outline"></ion-icon>
                             <Link to="/" onClick={handleLogout}>Đăng xuất</Link>
