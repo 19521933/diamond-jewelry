@@ -5,7 +5,6 @@ import Navbar from '../components/Navbar'
 import Newsletter from '../components/Newsletter';
 import GiftPageProducts from '../components/GiftPageProducts';
 import styles from "./GiftPage.module.css"
-import ReactPagination from '../components/Pagination';
 
 const GiftPage = () => {
     return (
@@ -65,7 +64,6 @@ const GiftPage = () => {
                 </div>
             </div>
             <GiftPageProducts />
-            <ReactPagination />
             <Newsletter />
             <Footer />
         </div>
