@@ -10,9 +10,9 @@ const Footer = () => {
 				<div className={styles.Left}>
 					<h1 className={styles.Logo}>DIAMOUND CITY</h1>
 					<p className={styles.Desc}>
-						There are many variations of passages of Lorem Ipsum available, but
-						the majority have suffered alteration in some form, by injected
-						humour, or randomised words which don’t look even slightly believable
+						Hội tụ và Tỏa Sáng là giá trị mà công ty DiamoundCity đem lại,
+						cùng với sự kết hợp tinh tế của trang sức đa dạng đem lại giá trị 
+						đẳng cấp cho khách hàng, tiên phong đặt chữ tín lên hàng đầu.
 					</p>
 					<div className={styles.SocialContainer}>
 						<div className={styles.SocialIcon} color="3B5999">
@@ -33,27 +33,27 @@ const Footer = () => {
 				<div className={styles.Center}>
 					<h3 className={styles.Title}>Useful Links</h3>
 					<ul className={styles.List}>
-						<li className={styles.ListItem}>Home</li>
-						<li className={styles.ListItem}>Cart</li>
-						<li className={styles.ListItem}>Man Fashion</li>
-						<li className={styles.ListItem}>Woman Fashion</li>
-						<li className={styles.ListItem}>Accessories</li>
+						<li className={styles.ListItem}>Trang chủ</li>
+						<li className={styles.ListItem}>Trang sức</li>
+						<li className={styles.ListItem}>Đồng Hồ</li>
+						<li className={styles.ListItem}>Giỏ hàng</li>
+						<li className={styles.ListItem}>Danh sách yêu thích</li>
 					</ul>
 				</div>
 
 				<div className={styles.Center2}>
 					<h3 className={styles.Title}>Another Links</h3>
 					<ul className={styles.List}>
-						<li className={styles.ListItem}>My Account</li>
-						<li className={styles.ListItem}>Order Tracking</li>
-						<li className={styles.ListItem}>Wishlist</li>
-						<li className={styles.ListItem}>Wishlist</li>
-						<li className={styles.ListItem}>Terms</li>
+						<li className={styles.ListItem}>Trang cá nhân</li>
+						<li className={styles.ListItem}>Facebook</li>
+						<li className={styles.ListItem}>Gmail</li>
+						<li className={styles.ListItem}>Đăng nhập</li>
+						<li className={styles.ListItem}>Liên hệ</li>
 					</ul>
 				</div>
 
 				<div className={styles.Right}>
-					<h3 className={styles.Title}>Contact</h3>
+					<h3 className={styles.Title}>Thông tin liên lạc</h3>
 					<div className={styles.ContactItem}>
 						<Room style={{ marginRight: "10px" }} /> 311 Nguyen Thien Thuat , Quan 1 Viet Nam
 					</div>
@@ -68,14 +68,14 @@ const Footer = () => {
 			</div>
 
 			<div className={styles.bottom}>
-				<p>@Copyright 2019. All Right Reserved</p>
+				<p>@Bản quyền 2019. Tất cả các quyền được bảo lưu</p>
 
 				<ul>
 					<li>
-						<Link to="/chinh-sach-bao-mat">Privacy Policy</Link>
+						<Link to="/chinh-sach-bao-mat">Chính sách bảo mật</Link>
 					</li>
 					<li>
-						<Link to="/dieu-khoan-va-dieu-kien">Terms & Conditions</Link>
+						<Link to="/dieu-khoan-va-dieu-kien">Điều khoản và điều kiện</Link>
 					</li>
 				</ul>
 			</div>
