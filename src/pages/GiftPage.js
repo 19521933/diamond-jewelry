@@ -1,17 +1,18 @@
 import React from 'react'
 import Announcement from '../components/Announcement'
 import Footer from '../components/Footer';
-import Header from '../components/Header'
+import Navbar from '../components/Navbar'
 import Newsletter from '../components/Newsletter';
 import GiftPageProducts from '../components/GiftPageProducts';
 import styles from "./GiftPage.module.css"
+import ReactPagination from '../components/Pagination';
 
 const GiftPage = () => {
     return (
         <div className={styles.Container}>
-            <Header />
+            <Navbar />
             <Announcement />
-            <h1 className={styles.Title}>Gift Page</h1>
+            <h1 className={styles.Title}>Trang Quà Tặng</h1>
             <div className={styles.FilterContainer}>
                 <div className={styles.Filter}>
                     <span className={styles.FilterText}>Bộ lọc sản phẩm:</span>
@@ -64,6 +65,7 @@ const GiftPage = () => {
                 </div>
             </div>
             <GiftPageProducts />
+            <ReactPagination />
             <Newsletter />
             <Footer />
         </div>
