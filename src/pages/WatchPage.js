@@ -1,17 +1,18 @@
 import React from 'react'
 import Announcement from '../components/Announcement'
 import Footer from '../components/Footer';
-import Header from '../components/Header'
+import Navbar from '../components/Navbar'
 import Newsletter from '../components/Newsletter';
 import WatchPageProducts from '../components/WatchPageProducts';
 import styles from "./WatchPage.module.css"
+import ReactPagination from '../components/Pagination';
 
 const WatchPage = () => {
     return (
         <div className={styles.Container}>
-            <Header />
+            <Navbar />
             <Announcement />
-            <h1 className={styles.Title}>Watch Page</h1>
+            <h1 className={styles.Title}>Trang Đồng Hồ</h1>
             <div className={styles.FilterContainer}>
                 <div className={styles.Filter}>
                     <span className={styles.FilterText}>Bộ lọc sản phẩm:</span>
@@ -59,6 +60,7 @@ const WatchPage = () => {
                 </div>
             </div>
             <WatchPageProducts />
+            <ReactPagination />
             <Newsletter />
             <Footer />
         </div>
