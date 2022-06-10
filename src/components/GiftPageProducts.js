@@ -6,7 +6,7 @@ import styles from "./GiftPageProducts.module.css"
 const GiftPageProducts = () => {
   return (
     <>
-    <div className={styles.Title}>GIFT PAGE PRODUCTS</div>
+    <div className={styles.Title}>CÁC SẢN PHẨM QUÀ TẶNG</div>
     <div className={styles.Container}>
         {GiftProducts.map((item)=>(
                 <Product item={item} key={item.id}/>
