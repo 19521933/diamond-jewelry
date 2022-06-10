@@ -4,7 +4,8 @@
 .Title {
 	margin: 15px;
 	opacity: 90%;
-	margin-left: 24px;
+	margin-left: 23px;
+	font-family: 'Charis SIL', serif;
 }
 
 .FilterContainer {
@@ -16,10 +17,10 @@
 }
 
 .FilterText {
-	font-size: 20px;
+	font-size: 24px;
 	font-weight: 600;
 	margin-right: 20px;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: 'Charis SIL', serif;
 }
 
 .Select {
