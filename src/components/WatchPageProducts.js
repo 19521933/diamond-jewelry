@@ -6,7 +6,7 @@ import styles from "./WatchPageProducts.module.css"
 const WatchPageProducts = () => {
   return (
     <>
-    <div className={styles.Title}>WATCHES PAGE PRODUCTS</div>
+    <div className={styles.Title}>CÁC SẢN PHẨM ĐỒNG HỒ</div>
     <div className={styles.Container}>
         {WatchProducts.map((item)=>(
                 <Product item={item} key={item.id}/>
