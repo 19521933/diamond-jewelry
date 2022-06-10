@@ -31,7 +31,7 @@ const Footer = () => {
 				</div>
 
 				<div className={styles.Center}>
-					<h3 className={styles.Title}>Useful Links</h3>
+					<h3 className={styles.Title}>Các Links Hữu Dụng</h3>
 					<ul className={styles.List}>
 						<li className={styles.ListItem}>Trang chủ</li>
 						<li className={styles.ListItem}>Trang sức</li>
@@ -42,7 +42,7 @@ const Footer = () => {
 				</div>
 
 				<div className={styles.Center2}>
-					<h3 className={styles.Title}>Another Links</h3>
+					<h3 className={styles.Title}>Các Links Khác</h3>
 					<ul className={styles.List}>
 						<li className={styles.ListItem}>Trang cá nhân</li>
 						<li className={styles.ListItem}>Facebook</li>
@@ -84,3 +84,4 @@ const Footer = () => {
 }
 
 export default Footer
+
