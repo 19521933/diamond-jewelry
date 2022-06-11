@@ -8,15 +8,15 @@ import ls from 'local-storage';
 const UserDatatable = () => {
 	const [data, setData] = useState([]);
 
+	const config = {
+		headers: {
+			Authorization: "Bearer " + ls.get("accessToken")
+		}
+	}
+
 	useEffect(() => {
 		async function fetchData() {
-			const config = {
-				headers: {
-					Authorization: "Bearer " + ls.get("accessToken")
-				}
-			}
-
-			const users = await axios.get("http://diamondjewelry-api.herokuapp.com/api/v1/users", config);
+			const users = await axios.get(process.env.REACT_APP_API_URL + "/users", config);
 
 			const userRows = users.data.map((user) => ({
 				id: user.id,
@@ -34,6 +34,7 @@ const UserDatatable = () => {
 
 	const handleDelete = (id) => {
 		setData(data.filter((item) => item.id !== id));
+		axios.delete(process.env.REACT_APP_API_URL + "/users/" + id, config);
 	};
 
 	const userColumns = [
