@@ -4,13 +4,23 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import ls from 'local-storage';
+import { fbStorage } from "../firebase/firebase";
+
 
 const ProductDatatable = () => {
 	const [data, setData] = useState([]);
 
+	const config = {
+		headers: {
+			Authorization: "Bearer " + ls.get("accessToken")
+		}
+	}
+
 	useEffect(() => {
 		async function fetchData() {
-			const products = await axios.get("http://diamondjewelry-api.herokuapp.com/api/v1/products");
+
+			const products = await axios.get("http://diamondjewelry-api.herokuapp.com/api/v1/products", config);
 
 			const productRows = products.data.map((product) => ({
 				id: product.id,
@@ -33,8 +43,12 @@ const ProductDatatable = () => {
 		fetchData();
 	}, []);
 
-	const handleDelete = (id) => {
+	const handleDelete = async (id) => {
+		const product = await axios.get(process.env.REACT_APP_API_URL + "/products/" + id, config);
+		const imageRef = fbStorage.refFromURL(product.data.image);
+		imageRef.delete();
 		setData(data.filter((item) => item.id !== id));
+		axios.delete(process.env.REACT_APP_API_URL + "/products/" + id, config);
 	};
 
 	const productColumns = [
