@@ -107,7 +107,7 @@ export default function RegisterPage() {
     return (
         <div className={styles.container}>
             <div className={`${styles.success_popup} ${styles.hide}`}>
-                <p>Đăng kí thành công.</p>
+                <p className={styles.success_button}>Đăng kí thành công.</p>
                 <Link className={styles.login_button} to="/dang-nhap">
                     <button>Đăng nhập</button>
                 </Link>
@@ -116,7 +116,7 @@ export default function RegisterPage() {
                 </button>
             </div>
             <div className={`${styles.error_popup} ${styles.hide}`}>
-                <p>Đăng kí thất bại.</p>
+                <p className={styles.notice_error}>Đăng kí thất bại.</p>
                 <p className={styles.error_message}></p>
                 <button className={styles.close_button} onClick={hideErrorPopup}>
                     X
