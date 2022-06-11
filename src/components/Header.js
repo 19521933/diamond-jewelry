@@ -7,7 +7,7 @@ export default function Header() {
     const navigate = useNavigate();
 
     function handleLogout() {
-        ls.remove("access_token");
+        ls.remove("accessToken");
         navigate("/");
     }
 
@@ -26,7 +26,7 @@ export default function Header() {
                 </ul>
                 <ul className={styles.right}>
                     {
-                        ls.get("access_token") ? 
+                        ls.get("accessToken") ? 
                         <li>
                             <ion-icon name="log-in-outline"></ion-icon>
                             <Link to="/" onClick={handleLogout}>Đăng xuất</Link>

@@ -34,8 +34,8 @@ function App() {
 				<Route path="/trang-suc" element={<JewelryPage />} />
 				<Route path="/dong-ho" element={<WatchPage />} />
 				<Route path="/qua-tang" element={<GiftPage />} />
-				<Route path="/san-pham" element={<Product />} />
 				<Route path="/tai-khoan" element={<ProfilePage />} />
+				<Route path="/:productId" element={<Product />} />
 				<Route path="/admin">
 					<Route index element={<Home />} />
 					<Route path="login" element={<Login />} />

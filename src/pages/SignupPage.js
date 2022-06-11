@@ -7,7 +7,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   function onSuccess(response) {
-    localStorage.setItem("access_token", response.access_token);
+    localStorage.setItem("accessToken", response.accessToken);
     navigate("/");
   }
 

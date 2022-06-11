@@ -11,7 +11,7 @@ export default function RegisterPage() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (ls.get("access_token")) {
+        if (ls.get("accessToken")) {
             navigate("/");
         }
     }, []);
@@ -53,7 +53,7 @@ export default function RegisterPage() {
     }
 
     function onSuccess(response) {
-        localStorage.setItem("access_token", response.access_token);
+        localStorage.setItem("accessToken", response.accessToken);
         navigate("/");
     }
 

@@ -1,16 +1,22 @@
 import axios from 'axios';
 import "./Datatable.css";
 import { DataGrid } from "@mui/x-data-grid";
-// import { userColumns, userRows } from "../datatablesource";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import ls from 'local-storage';
 
 const UserDatatable = () => {
 	const [data, setData] = useState([]);
 
 	useEffect(() => {
 		async function fetchData() {
-			const users = await axios.get("http://diamondjewelry-api.herokuapp.com/api/v1/users")
+			const config = {
+				headers: {
+					Authorization: "Bearer " + ls.get("accessToken")
+				}
+			}
+
+			const users = await axios.get("http://diamondjewelry-api.herokuapp.com/api/v1/users", config);
 
 			const userRows = users.data.map((user) => ({
 				id: user.id,

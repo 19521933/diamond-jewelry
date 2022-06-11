@@ -28,7 +28,6 @@ const ProductDatatable = () => {
 				type: product.details.type
 			}));
 
-			console.log(productRows);
 			setData(productRows);
 		}
 		fetchData();
