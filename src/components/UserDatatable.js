@@ -132,9 +132,9 @@ const UserDatatable = () => {
 			<div className="datatable">
 				<div className="datatableTitle">
 					Thao Tác Khách Hàng
-					<Link to="/admin/users/new" className="link">
+					{/* <Link to="/admin/users/new" className="link">
 						Thêm
-					</Link>
+					</Link> */}
 				</div>
 				<DataGrid
 					className="datagrid"
