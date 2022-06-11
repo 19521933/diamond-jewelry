@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styles from "./LikeItem.module.css";
+import ls from 'local-storage';
+import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faBagShopping } from "@fortawesome/free-solid-svg-icons";
 
@@ -9,13 +11,27 @@ export default function LikeItem(props) {
     currency: "VND",
   }).format(props.price);
 
+  const userId = ls.get("userId");
+  const accessToken = ls.get("accessToken");
+
   const onRemoveButtonClick = () => {
-    console.log(props.name);
-    alert("nút xóa sản phẩm: " + props.name);
+    const response = axios({
+      method: 'put',
+      url: process.env.REACT_APP_API_URL + `/users/removeLikedProduct/${userId}`,
+      data: props.id,
+      headers: {
+        'Authorization': 'Bearer ' + accessToken,
+        'Content-Type': 'application/text'}
+    }).then(props.onItem)
   };
 
   const onPayButtonClick = () => {
-    alert("nút thêm vào giỏ hàng: " + props.name);
+    const response = axios({
+      method: 'put',
+      url: process.env.REACT_APP_API_URL + `/carts/addItem/${userId}`,
+      data: {id: props.id, quantity: 1},
+      headers: {'Authorization': 'Bearer ' + accessToken}
+    }).then(props.onItem)
   };
 
   function Avail() {

@@ -1,72 +1,97 @@
 import React from 'react'
 import styles from './LikePage.module.css'
+import ls from 'local-storage';
+import axios from 'axios';
 import  { useState, useEffect, useCallback } from 'react'
 import LikeItem from '../components/LikeItem'
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { PublicTwoTone } from '@material-ui/icons';
+
+const LikeData =
+[
+  {
+    id: 1,
+    image: "https://picsum.photos/175/120",
+    title: "Đồng hồ Bạc 1",
+    price: 765000,
+    added_day: '20/04/2022',
+    avail: true
+  },
+
+  {
+    id: 2,
+    image:"https://picsum.photos/175/120",
+    title: "Đồng hồ Bạc 2",
+    price: 765000,
+    added_day: '19/04/2022',
+    avail: false
+  },
+
+  {
+    id: 3,
+    image: "https://picsum.photos/175/120",
+    title: "Đồng hồ Bạc 3",
+    price: 765000,
+    added_day: '18/04/2022',
+    avail: true
+  },
+
+  {
+    id: 4,
+    image: "https://picsum.photos/175/120",
+    title: "Đồng hồ Bạc 4",
+    price: 765000,
+    added_day: '18/04/2022',
+    avail: true
+  },
+
+  {
+    id: 5,
+    image: "https://picsum.photos/175/120",
+    title: "Đồng hồ Bạc 5",
+    price: 765000,
+    added_day: '18/04/2022',
+    avail: true
+  }
+]
 
 export default function LikePage() {
-    const LikeData = {
-        items: [
-          {
-            id: 1,
-            image: "https://picsum.photos/175/120",
-            name: "Đồng hồ Bạc 1",
-            price: 765000,
-            added_day: '20/04/2022',
-            avail: true
-          },
-    
-          {
-            id: 2,
-            image:"https://picsum.photos/175/120",
-            name: "Đồng hồ Bạc 2",
-            price: 765000,
-            added_day: '19/04/2022',
-            avail: false
-          },
-    
-          {
-            id: 3,
-            image: "https://picsum.photos/175/120",
-            name: "Đồng hồ Bạc 3",
-            price: 765000,
-            added_day: '18/04/2022',
-            avail: true
-          },
+  const [likeList, setLikeList] = useState();
+  const [likeItem, setLikeItem] = useState(0);
 
-          {
-            id: 4,
-            image: "https://picsum.photos/175/120",
-            name: "Đồng hồ Bạc 4",
-            price: 765000,
-            added_day: '18/04/2022',
-            avail: true
-          },
+  const userId = ls.get("userId");
+  const accessToken = ls.get("accessToken");
 
-          {
-            id: 5,
-            image: "https://picsum.photos/175/120",
-            name: "Đồng hồ Bạc 5",
-            price: 765000,
-            added_day: '18/04/2022',
-            avail: true
-          }
-        ]
-      }
+  async function fetchData() {
+    const response = await axios.get(
+      process.env.REACT_APP_API_URL + `/users/likedProducts/${userId}`, 
+      {headers: {'Authorization': 'Bearer ' + accessToken}});
+    setLikeList(response.data);
+  }
 
-      const [likeList, setLikeList] = useState(LikeData);
-
-      const [likeItem, setLikeItem] = useState('');
-
-    const onDeleteButtonClick = () => {
-      alert('Đây là nút xóa toàn bộ')
+  useEffect(() => {
+    if (userId !== undefined) {
+      fetchData();
     }
-
-    const onAddButtonClick =() => {
-      alert("Đây là nút thêm vào giỏ hàng")
+    else {
+      setLikeList(LikeData);
     }
-       
+	}, []);
+
+  const onDeleteButtonClick = () => {
+    const response = axios({
+      method: 'put',
+      url: process.env.REACT_APP_API_URL + `/users/removeAllLikedProduct/${userId}`, 
+      headers: {'Authorization': 'Bearer ' + accessToken}
+    }).then(fetchData())
+  }
+
+  const onAddButtonClick = () => {}
+
+  const handleItem = useCallback(() => {
+    fetchData();
+  })
 
   return (
     <>
@@ -95,9 +120,9 @@ export default function LikePage() {
             </thead>
             <tbody>
             {
-               likeList.items.map(item =>
-               <LikeItem key={item.id} id={item.id} image={item.image} name={item.name} price={item.price}
-                    avail={item.avail} added_day={item.added_day} />
+               likeList?.map(item =>
+               <LikeItem key={item.id} id={item.id} image={item.image} name={item.title} price={item.price}
+                    avail={item.stock > 0} onItem={handleItem} />
               )
             }
             </tbody>
