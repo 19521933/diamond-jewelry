@@ -11,6 +11,7 @@ import ls from 'local-storage';
 import $ from 'jquery';
 import Swal from 'sweetalert2';
 
+import '../components/comment.css';
 
 const ProductPage = () => {
 	const [quantity, setQuantity] = useState(1);
@@ -99,7 +100,10 @@ const ProductPage = () => {
 				</div>
 
 			</div>
-			<Comments />
+			<Comments
+			   commentsUrl="http://localhost:3004/comments"
+			   currentUserId="1"
+			 />
 			<Newsletter />
 			<Footer />
 		</div>
