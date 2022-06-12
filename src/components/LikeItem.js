@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import styles from "./LikeItem.module.css";
 import ls from 'local-storage';
 import axios from 'axios';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faBagShopping } from "@fortawesome/free-solid-svg-icons";
+import Swal from 'sweetalert2';
+
 
 export default function LikeItem(props) {
   const formattedPrice = new Intl.NumberFormat("vi-VN", {
@@ -14,24 +14,42 @@ export default function LikeItem(props) {
   const userId = ls.get("userId");
   const accessToken = ls.get("accessToken");
 
-  const handleRemoveButtonClick = () => {
-    const response = axios({
-      method: 'put',
-      url: process.env.REACT_APP_API_URL + `/users/removeLikedProduct/${userId}`,
-      data: props.id,
-      headers: {
-        'Authorization': 'Bearer ' + accessToken,
-        'Content-Type': 'application/text'}
-    }).then(props.onItem);
-  };
+  const handleRemoveButtonClick = async () => {
+    const result = await Swal.fire({
+      title: 'Bạn có muốn xóa sản phẩm này khỏi danh sách yêu thích?',
+      showCancelButton: true,
+      confirmButtonText: 'Xóa',
+      cancelButtonText: `Hủy`,
+      confirmButtonColor: "#d33",
+      padding: "2em"
+    });
+    if (result.isConfirmed) {
+      const response = axios({
+        method: 'put',
+        url: process.env.REACT_APP_API_URL + `/users/removeLikedProduct/${userId}`,
+        data: props.id,
+        headers: {
+          'Authorization': 'Bearer ' + accessToken,
+          'Content-Type': 'application/text'
+        }
+      }).then(props.onItem);
+    };
+  }
 
-  const handlePayButtonClick = () => {
-    const response = axios({
+  const handlePayButtonClick = async () => {
+    const response = await axios({
       method: 'put',
       url: process.env.REACT_APP_API_URL + `/carts/addItem/${userId}`,
-      data: {id: props.id, quantity: 1},
-      headers: {'Authorization': 'Bearer ' + accessToken}
-    }).then(props.onItem);
+      data: { id: props.id, quantity: 1 },
+      headers: { 'Authorization': 'Bearer ' + accessToken }
+    });
+    if (response.status === 200) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Thành công',
+        text: 'Sản phẩn đã được thêm vào giỏ hàng',
+      });
+    }
   };
 
   function Avail() {

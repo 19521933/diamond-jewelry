@@ -4,6 +4,7 @@ import styles from './CartItem.module.css';
 import ls from 'local-storage';
 import axios from 'axios';
 import tvkd from 'tieng-viet-khong-dau'
+import Swal from 'sweetalert2';
 
 export default function CartItem(props) {
     const [quantity, setQuantity] = useState(props.quantity);
@@ -49,16 +50,27 @@ export default function CartItem(props) {
         });
     }
 
-    const handleRemoveButtonClick = () => {
-        const response = axios({
-            method: 'put',
-            url: process.env.REACT_APP_API_URL + `/carts/removeItem/${userId}`,
-            data: props.id,
-            headers: {
-                'Authorization': 'Bearer ' + accessToken,
-                'Content-Type': 'application/text'
-            }
-        }).then(props.onUpdateQuantity);
+    const handleRemoveButtonClick = async () => {
+        const result = await Swal.fire({
+            title: 'Bạn có muốn xóa sản phẩm này khỏi giỏ hàng?',
+            showCancelButton: true,
+            confirmButtonText: 'Xóa',
+            cancelButtonText: `Hủy`,
+            confirmButtonColor: "#d33",
+            padding: "2em"
+        });
+        if (result.isConfirmed) {
+            const response = axios({
+                method: 'put',
+                url: process.env.REACT_APP_API_URL + `/carts/removeItem/${userId}`,
+                data: props.id,
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken,
+                    'Content-Type': 'application/text'
+                }
+            }).then(props.onUpdateQuantity);
+
+        }
     }
 
     return (
