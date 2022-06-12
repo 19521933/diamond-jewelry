@@ -9,6 +9,8 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import ls from 'local-storage';
 import $ from 'jquery';
+import Swal from 'sweetalert2';
+
 
 const ProductPage = () => {
 	const [quantity, setQuantity] = useState(1);
@@ -52,13 +54,20 @@ const ProductPage = () => {
 		setQuantity(value);
 	}
 
-	const handleAddToCartButton = () => {
-        const response = axios({
+	const handleAddToCartButton = async () => {
+        const response = await axios({
             method: 'put',
             url: process.env.REACT_APP_API_URL + `/carts/addItem/${userId}`,
             data: {id: productId, quantity: quantity},
             headers: {'Authorization': 'Bearer ' + accessToken}
-        }).then(console.log(response));
+        });
+		if (response.status === 200) {
+			Swal.fire({
+			  icon: 'success',
+			  title: 'Thành công',
+			  text: 'Sản phẩn đã được thêm vào giỏ hàng',
+			});
+		  }
 	}
 
 	return (
