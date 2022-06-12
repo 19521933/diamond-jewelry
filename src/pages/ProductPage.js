@@ -8,6 +8,7 @@ import styles from "./ProductPage.module.css"
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import $ from 'jquery';
+import '../components/comment.css';
 
 const ProductPage = () => {
 	const [quantity, setQuantity] = useState(1);
@@ -77,7 +78,10 @@ const ProductPage = () => {
 				</div>
 
 			</div>
-			<Comments />
+			<Comments
+			   commentsUrl="http://localhost:3004/comments"
+			   currentUserId="1"
+			 />
 			<Newsletter />
 			<Footer />
 		</div>
