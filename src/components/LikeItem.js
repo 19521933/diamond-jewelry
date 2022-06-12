@@ -14,7 +14,7 @@ export default function LikeItem(props) {
   const userId = ls.get("userId");
   const accessToken = ls.get("accessToken");
 
-  const onRemoveButtonClick = () => {
+  const handleRemoveButtonClick = () => {
     const response = axios({
       method: 'put',
       url: process.env.REACT_APP_API_URL + `/users/removeLikedProduct/${userId}`,
@@ -22,16 +22,16 @@ export default function LikeItem(props) {
       headers: {
         'Authorization': 'Bearer ' + accessToken,
         'Content-Type': 'application/text'}
-    }).then(props.onItem)
+    }).then(props.onItem);
   };
 
-  const onPayButtonClick = () => {
+  const handlePayButtonClick = () => {
     const response = axios({
       method: 'put',
       url: process.env.REACT_APP_API_URL + `/carts/addItem/${userId}`,
       data: {id: props.id, quantity: 1},
       headers: {'Authorization': 'Bearer ' + accessToken}
-    }).then(props.onItem)
+    }).then(props.onItem);
   };
 
   function Avail() {
@@ -47,7 +47,7 @@ export default function LikeItem(props) {
         <td>
           <button
             id="remove-button"
-            onClick={onRemoveButtonClick}
+            onClick={handleRemoveButtonClick}
             className={styles.remove_button}
           >
             <i className="fa fa-trash-o mr-1" />
@@ -63,7 +63,7 @@ export default function LikeItem(props) {
         <td>
           <button
             id="pay-button"
-            onClick={onPayButtonClick}
+            onClick={handlePayButtonClick}
             className={styles.pay_button}
           >
             <i className="fa fa-shopping-basket mr-1" />

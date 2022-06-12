@@ -1,67 +1,88 @@
-import { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styles from './CartPage.module.css';
+import ls from 'local-storage';
+import axios from 'axios';
 import CartItem from '../components/CartItem';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-export default function CartPage() {
-    const cartData = {
-        items: [
-            {
-                id: 1,
-                image: "https://picsum.photos/175/120",
-                name: "Đồng hồ Bạc STYLE By PNJ DNA 0000Y000133",
-                price: 765000,
-                quantity: 1,
-                total_cost: 765000
-            },
-            {
-                id: 2,
-                image: "https://picsum.photos/175/120",
-                name: "Đồng hồ Bạc STYLE By PNJ DNA 0000Y000133",
-                price: 765000,
-                quantity: 1,
-                total_cost: 765000
-            },
-            {
-                id: 3,
-                image: "https://picsum.photos/175/120",
-                name: "Đồng hồ Bạc STYLE By PNJ DNA 0000Y000133",
-                price: 765000,
-                quantity: 1,
-                total_cost: 765000
-            },
-            {
-                id: 4,
-                image: "https://picsum.photos/175/120",
-                name: "Đồng hồ Bạc STYLE By PNJ DNA 0000Y000133",
-                price: 765000,
-                quantity: 1,
-                total_cost: 765000
-            },
-        ],
-        sub_total: 3060000,
-        shipping_fee: 300000,
-        grand_total: 3360000
-    }
-    
-    const [ subTotal, setSubTotal ] = useState(cartData.sub_total);
-    const [ shippingFee, setShippingFee ] = useState(cartData.shipping_fee);
-    const [ grandTotal, setGrandTotal ] = useState(cartData.grand_total);
+const cartData =
+    [
+        {
+            id: 1,
+            image: "https://picsum.photos/175/120",
+            title: "Đồng hồ Bạc STYLE By PNJ DNA 0000Y000133",
+            price: 765000,
+            quantity: 1,
+            total_cost: 765000
+        },
+        {
+            id: 2,
+            image: "https://picsum.photos/175/120",
+            title: "Đồng hồ Bạc STYLE By PNJ DNA 0000Y000133",
+            price: 765000,
+            quantity: 1,
+            total_cost: 765000
+        },
+        {
+            id: 3,
+            image: "https://picsum.photos/175/120",
+            title: "Đồng hồ Bạc STYLE By PNJ DNA 0000Y000133",
+            price: 765000,
+            quantity: 1,
+            total_cost: 765000
+        },
+        {
+            id: 4,
+            image: "https://picsum.photos/175/120",
+            title: "Đồng hồ Bạc STYLE By PNJ DNA 0000Y000133",
+            price: 765000,
+            quantity: 1,
+            total_cost: 765000
+        },
+    ]
+
+export default function CartPage() { 
+    const [cartList, setCartList] = useState([]);
+    const [subTotal, setSubTotal] = useState(0);
+    const [grandTotal, setGrandTotal] = useState(0);
+
+    const userId = ls.get("userId");
+    const accessToken = ls.get("accessToken");
 
     // format currency
     const formattedSubTotal = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(subTotal);
-    const formattedShippingFee = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(shippingFee);
+    const formattedVATFee = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(subTotal / 20);
     const formattedGrandTotal = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(grandTotal);
 
-    function updateCart(id, quantity) {
-        const item = cartData.items.find(item => item.id === id);
-        item.quantity = quantity;
-        item.total_cost = quantity * item.price;
-        cartData.sub_total = cartData.items.reduce((sum, item) => sum + item.total_cost, 0)
-        setSubTotal(cartData.sub_total);
-        setGrandTotal(cartData.sub_total + shippingFee);
+    async function fetchData() {
+        const response = await axios.get(
+            process.env.REACT_APP_API_URL + `/carts/cartItems/${userId}`, 
+            {headers: {'Authorization': 'Bearer ' + accessToken}});
+        setCartList(response.data);
     }
+
+    useEffect(() => {
+        if (userId !== undefined) {
+          fetchData();
+        }
+        else {
+          setCartList(cartData);
+        }
+    }, []);
+
+    useEffect(() => {
+        let total = 0;
+        for (let i = 0; i < cartList.length; i++) {
+          total += Number(cartList[i].price * cartList[i].quantity)
+        }
+        setSubTotal(total);
+        setGrandTotal(total + total / 20);
+      }, [cartList])
+
+    const handleUpdateQuantity = useCallback(() => {
+        fetchData();
+    })
 
     return (
         <div className={styles.container}>
@@ -87,9 +108,9 @@ export default function CartPage() {
                     </thead>
                     <tbody>
                         {
-                            cartData.items.map(item =>
-                                <CartItem key={item.id} id={item.id} image={item.image} name={item.name} price={item.price}
-                                    quantity={item.quantity} total_cost={item.total_cost} updateCart={updateCart}></CartItem>
+                            cartList?.map(item =>
+                                <CartItem key={item.id} id={item.id} image={item.image} name={item.title} price={item.price}
+                                    quantity={item.quantity} total_cost={item.quantity * item.price} onUpdateQuantity={handleUpdateQuantity}></CartItem>
                             )
                         }
                     </tbody>
@@ -107,8 +128,8 @@ export default function CartPage() {
                             <td>{formattedSubTotal}</td>
                         </tr>
                         <tr>
-                            <td>Phí vận chuyển</td>
-                            <td>{formattedShippingFee}</td>
+                            <td>Thuế GTGT (5%)</td>
+                            <td>{formattedVATFee}</td>
                         </tr>
                         <tr>
                             <td colSpan={2}>

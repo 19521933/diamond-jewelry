@@ -1,14 +1,13 @@
-import React from 'react'
+import React, { useState, useEffect, useCallback } from 'react';
 import styles from './LikePage.module.css'
 import ls from 'local-storage';
 import axios from 'axios';
-import  { useState, useEffect, useCallback } from 'react'
 import LikeItem from '../components/LikeItem'
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { PublicTwoTone } from '@material-ui/icons';
 
-const LikeData =
+const likeData =
 [
   {
     id: 1,
@@ -57,8 +56,7 @@ const LikeData =
 ]
 
 export default function LikePage() {
-  const [likeList, setLikeList] = useState();
-  const [likeItem, setLikeItem] = useState(0);
+  const [likeList, setLikeList] = useState([]); 
 
   const userId = ls.get("userId");
   const accessToken = ls.get("accessToken");
@@ -75,7 +73,7 @@ export default function LikePage() {
       fetchData();
     }
     else {
-      setLikeList(LikeData);
+      setLikeList(likeData);
     }
 	}, []);
 

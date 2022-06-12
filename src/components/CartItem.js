@@ -1,9 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import styles from './CartItem.module.css';
+import ls from 'local-storage';
+import axios from 'axios';
 
 export default function CartItem(props) {
     const [ quantity, setQuantity ] = useState(props.quantity);
     const [ itemTotalCost, setItemTotalCost ] = useState(props.total_cost);
+
+    const userId = ls.get("userId");
+    const accessToken = ls.get("accessToken");
 
     // format currency
     const formattedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(props.price);
@@ -12,12 +17,16 @@ export default function CartItem(props) {
     function increaseQuantity() {
         setQuantity(preValue => preValue + 1);
         setItemTotalCost(props.price * (quantity + 1));
+
+        updateItemQuantity(props.quantity + 1).then(props.onUpdateQuantity);
     }
 
     function decreaseQuantity() {
         if (quantity > 0) {
             setQuantity(preValue => preValue - 1);
             setItemTotalCost(props.price * (quantity - 1));
+
+            updateItemQuantity(props.quantity - 1).then(props.onUpdateQuantity);
         }
     }
 
@@ -25,17 +34,35 @@ export default function CartItem(props) {
         const value = parseInt(event.target.value) > 0 ? parseInt(event.target.value) : 0;
         setQuantity(value);
         setItemTotalCost(props.price * value);
+
+        updateItemQuantity(value).then(props.onUpdateQuantity);
     }
 
-    useEffect(() => {
-        props.updateCart(props.id, quantity);
-    });
+    async function updateItemQuantity(quantity) {
+        const response = await axios({
+            method: 'put',
+            url: process.env.REACT_APP_API_URL + `/carts/addItem/${userId}`,
+            data: {id: props.id, quantity: quantity},
+            headers: {'Authorization': 'Bearer ' + accessToken}
+        });
+    }
+
+    const handleRemoveButtonClick = () => {
+        const response = axios({
+            method: 'put',
+            url: process.env.REACT_APP_API_URL + `/carts/removeItem/${userId}`,
+            data: props.id,
+            headers: {
+              'Authorization': 'Bearer ' + accessToken,
+              'Content-Type': 'application/text'}
+          }).then(props.onUpdateQuantity);
+    }
 
     return (
         <>
             <tr className={props.wrapper}>
                 <td>
-                    <button className={styles.remove_button}>
+                    <button onClick={handleRemoveButtonClick} className={styles.remove_button}>
                         <ion-icon name="trash-outline"></ion-icon>
                     </button>
                 </td>
