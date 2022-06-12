@@ -27,3 +27,8 @@
     color: rgb(201, 15, 15);
     font-weight: bold;
 }
+
+.product_image {
+    max-width: 250px;
+    max-width: 80px;
+}

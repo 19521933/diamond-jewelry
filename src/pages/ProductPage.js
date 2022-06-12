@@ -3,6 +3,7 @@ import Announcement from '../components/Announcement'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Newsletter from '../components/Newsletter'
+import Comments from '../components/Comments'
 import styles from "./ProductPage.module.css"
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -89,6 +90,7 @@ const ProductPage = () => {
 				</div>
 
 			</div>
+			<Comments />
 			<Newsletter />
 			<Footer />
 		</div>
