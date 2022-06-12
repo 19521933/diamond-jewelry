@@ -54,7 +54,7 @@ export default function LikeItem(props) {
           </button>
         </td>
         <td>
-          <img src={props.image} alt={props.name} />
+          <img className={styles.product_image} src={props.image} alt={props.name} />
         </td>
         <td>{props.name}</td>
         <td className={styles.price}>{formattedPrice}</td>

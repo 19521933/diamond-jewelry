@@ -7,64 +7,17 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { PublicTwoTone } from '@material-ui/icons';
 
-const likeData =
-[
-  {
-    id: 1,
-    image: "https://picsum.photos/175/120",
-    title: "Đồng hồ Bạc 1",
-    price: 765000,
-    added_day: '20/04/2022',
-    avail: true
-  },
-
-  {
-    id: 2,
-    image:"https://picsum.photos/175/120",
-    title: "Đồng hồ Bạc 2",
-    price: 765000,
-    added_day: '19/04/2022',
-    avail: false
-  },
-
-  {
-    id: 3,
-    image: "https://picsum.photos/175/120",
-    title: "Đồng hồ Bạc 3",
-    price: 765000,
-    added_day: '18/04/2022',
-    avail: true
-  },
-
-  {
-    id: 4,
-    image: "https://picsum.photos/175/120",
-    title: "Đồng hồ Bạc 4",
-    price: 765000,
-    added_day: '18/04/2022',
-    avail: true
-  },
-
-  {
-    id: 5,
-    image: "https://picsum.photos/175/120",
-    title: "Đồng hồ Bạc 5",
-    price: 765000,
-    added_day: '18/04/2022',
-    avail: true
-  }
-]
 
 export default function LikePage() {
-  const [likeList, setLikeList] = useState([]); 
+  const [likeList, setLikeList] = useState([]);
 
   const userId = ls.get("userId");
   const accessToken = ls.get("accessToken");
 
   async function fetchData() {
     const response = await axios.get(
-      process.env.REACT_APP_API_URL + `/users/likedProducts/${userId}`, 
-      {headers: {'Authorization': 'Bearer ' + accessToken}});
+      process.env.REACT_APP_API_URL + `/users/likedProducts/${userId}`,
+      { headers: { 'Authorization': 'Bearer ' + accessToken } });
     setLikeList(response.data);
   }
 
@@ -72,20 +25,17 @@ export default function LikePage() {
     if (userId !== undefined) {
       fetchData();
     }
-    else {
-      setLikeList(likeData);
-    }
-	}, []);
+  }, []);
 
-  const onDeleteButtonClick = () => {
-    const response = axios({
-      method: 'put',
-      url: process.env.REACT_APP_API_URL + `/users/removeAllLikedProduct/${userId}`, 
-      headers: {'Authorization': 'Bearer ' + accessToken}
-    }).then(fetchData())
-  }
+  // const onDeleteButtonClick = () => {
+  //   const response = axios({
+  //     method: 'put',
+  //     url: process.env.REACT_APP_API_URL + `/users/removeAllLikedProduct/${userId}`,
+  //     headers: { 'Authorization': 'Bearer ' + accessToken }
+  //   }).then(fetchData())
+  // }
 
-  const onAddButtonClick = () => {}
+  // const onAddButtonClick = () => { }
 
   const handleItem = useCallback(() => {
     fetchData();
@@ -93,8 +43,8 @@ export default function LikePage() {
 
   return (
     <>
+      <Header />
       <div className={styles.like_container}>
-          <Header />
         <div className={styles.like_header}>
           <ul>
             <li>Trang chủ</li>
@@ -117,23 +67,23 @@ export default function LikePage() {
               </tr>
             </thead>
             <tbody>
-            {
-               likeList?.map(item =>
-               <LikeItem key={item.id} id={item.id} image={item.image} name={item.title} price={item.price}
+              {
+                likeList?.map(item =>
+                  <LikeItem key={item.id} id={item.id} image={item.image} name={item.title} price={item.price}
                     avail={item.stock > 0} onItem={handleItem} />
-              )
-            }
+                )
+              }
             </tbody>
-              
+
           </table>
-          <div className={styles.div_btn}>
+          {/* <div className={styles.div_btn}>
             <button id='delete-button' className={styles.delete_button} onClick={onDeleteButtonClick}>Bỏ tất cả sản phẩm khỏi Danh sách yêu thích</button>
             <button id='add-button' className={styles.add_button} onClick={onAddButtonClick}>Thêm tất cả sản phẩm vào Giỏ hàng</button>
-          </div>
-          
+          </div> */}
+
         </div>
-        <Footer />
       </div>
+      <Footer />
     </>
   )
 }

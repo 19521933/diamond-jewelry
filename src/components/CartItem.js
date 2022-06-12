@@ -1,11 +1,13 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom'
 import styles from './CartItem.module.css';
 import ls from 'local-storage';
 import axios from 'axios';
+import tvkd from 'tieng-viet-khong-dau'
 
 export default function CartItem(props) {
-    const [ quantity, setQuantity ] = useState(props.quantity);
-    const [ itemTotalCost, setItemTotalCost ] = useState(props.total_cost);
+    const [quantity, setQuantity] = useState(props.quantity);
+    const [itemTotalCost, setItemTotalCost] = useState(props.total_cost);
 
     const userId = ls.get("userId");
     const accessToken = ls.get("accessToken");
@@ -42,8 +44,8 @@ export default function CartItem(props) {
         const response = await axios({
             method: 'put',
             url: process.env.REACT_APP_API_URL + `/carts/addItem/${userId}`,
-            data: {id: props.id, quantity: quantity},
-            headers: {'Authorization': 'Bearer ' + accessToken}
+            data: { id: props.id, quantity: quantity },
+            headers: { 'Authorization': 'Bearer ' + accessToken }
         });
     }
 
@@ -53,9 +55,10 @@ export default function CartItem(props) {
             url: process.env.REACT_APP_API_URL + `/carts/removeItem/${userId}`,
             data: props.id,
             headers: {
-              'Authorization': 'Bearer ' + accessToken,
-              'Content-Type': 'application/text'}
-          }).then(props.onUpdateQuantity);
+                'Authorization': 'Bearer ' + accessToken,
+                'Content-Type': 'application/text'
+            }
+        }).then(props.onUpdateQuantity);
     }
 
     return (
@@ -67,9 +70,15 @@ export default function CartItem(props) {
                     </button>
                 </td>
                 <td>
-                    <img src={props.image} alt={props.name} />
+                    <Link to={`/san-pham/${props.id}/${tvkd.cFriendlyURI(props.name)}`}>
+                        <img className={styles.card_item_image} src={props.image} alt={props.name} />
+                    </Link>
                 </td>
-                <td>{props.name}</td>
+                <td>
+                    <Link className={styles.link} to={`/san-pham/${props.id}/${tvkd.cFriendlyURI(props.name)}`}>
+                        {props.name}
+                    </Link>
+                </td>
                 <td className={styles.price}>{formattedPrice}</td>
                 <td>
                     <div className={styles.quantity_wrapper}>

@@ -52,7 +52,7 @@ export default function CartPage() {
 
     // format currency
     const formattedSubTotal = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(subTotal);
-    const formattedVATFee = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(subTotal / 20);
+    const formattedVATFee = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(subTotal / 10);
     const formattedGrandTotal = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(grandTotal);
 
     async function fetchData() {
@@ -77,7 +77,7 @@ export default function CartPage() {
           total += Number(cartList[i].price * cartList[i].quantity)
         }
         setSubTotal(total);
-        setGrandTotal(total + total / 20);
+        setGrandTotal(total + total / 10);
       }, [cartList])
 
     const handleUpdateQuantity = useCallback(() => {
@@ -128,7 +128,7 @@ export default function CartPage() {
                             <td>{formattedSubTotal}</td>
                         </tr>
                         <tr>
-                            <td>Thuế GTGT (5%)</td>
+                            <td>Thuế GTGT (10%)</td>
                             <td>{formattedVATFee}</td>
                         </tr>
                         <tr>
