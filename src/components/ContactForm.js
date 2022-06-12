@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import axios from 'axios';
+import { FormatItalic, FormatLineSpacing } from "@material-ui/icons";
 
 export default function ContactForm() {
   const formik = useFormik({
@@ -31,6 +33,19 @@ export default function ContactForm() {
     alert(
       `The name: ${formik.values.name} ; The Email: ${formik.values.email}; The content: ${formik.values.content}`
     );
+    const response = axios({
+      method: 'post',
+      url: process.env.REACT_APP_API_URL + `/contacts`,
+      data: {
+        senderName: formik.values.name,
+        senderEmail: formik.values.email,
+        content: formik.values.content 
+      }
+    }).then(formik.setValues({
+      name: "",
+      email: "",
+      content: "",
+    }));
   };
 
   return (
