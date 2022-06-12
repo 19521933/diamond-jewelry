@@ -6,11 +6,15 @@ import Newsletter from '../components/Newsletter'
 import styles from "./ProductPage.module.css"
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import ls from 'local-storage';
 import $ from 'jquery';
 
 const ProductPage = () => {
 	const [quantity, setQuantity] = useState(1);
 	const { productId } = useParams();
+
+	const userId = ls.get("userId");
+    const accessToken = ls.get("accessToken");
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -47,6 +51,15 @@ const ProductPage = () => {
 		setQuantity(value);
 	}
 
+	const handleAddToCartButton = () => {
+        const response = axios({
+            method: 'put',
+            url: process.env.REACT_APP_API_URL + `/carts/addItem/${userId}`,
+            data: {id: productId, quantity: quantity},
+            headers: {'Authorization': 'Bearer ' + accessToken}
+        }).then(console.log(response));
+	}
+
 	return (
 		<div className={styles.Container}>
 			<Header />
@@ -69,7 +82,7 @@ const ProductPage = () => {
 								<input type="number" value={quantity} onChange={handleChange} />
 								<button className={styles.increase_button} onClick={increaseQuantity}>+</button>
 							</div>
-							<button className={styles.Button}>THÊM VÀO GIỎ HÀNG</button>
+							<button onClick={handleAddToCartButton} className={styles.Button}>THÊM VÀO GIỎ HÀNG</button>
 						</div>
 					</div>
 
