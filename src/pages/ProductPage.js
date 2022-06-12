@@ -101,8 +101,7 @@ const ProductPage = () => {
 
 			</div>
 			<Comments
-			   commentsUrl="http://localhost:3004/comments"
-			   currentUserId="1"
+			   productId={productId}
 			 />
 			<Newsletter />
 			<Footer />

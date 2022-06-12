@@ -2,37 +2,30 @@ import CommentForm from "./CommentForm";
 import ReactStars from "react-rating-stars-component";
 import React from "react";
 import './comment.css';
+import ls from 'local-storage';
 
-const ratingChanged = (newRating) => {
-  console.log(newRating);
-};
 const Comment = ({
   comment,
-  replies,
   setActiveComment,
   activeComment,
   updateComment,
-  deleteComment,
-  addComment,
-  parentId = null,
-  currentUserId,
+  deleteComment
 }) => {
+  const userId = ls.get("userId");
+
   const isEditing =
     activeComment &&
     activeComment.id === comment.id &&
     activeComment.type === "editing";
-  const isReplying =
-    activeComment &&
-    activeComment.id === comment.id &&
-    activeComment.type === "replying";
-  const fiveMinutes = 300000;
-  const timePassed = new Date() - new Date(comment.createdAt) > fiveMinutes;
   const canDelete =
-    currentUserId === comment.userId && replies.length === 0 && !timePassed;
-  const canReply = Boolean(currentUserId);
-  const canEdit = currentUserId === comment.userId && !timePassed;
-  const replyId = parentId ? parentId : comment.id;
-  const createdAt = new Date(comment.createdAt).toLocaleDateString();
+    userId === comment.userId;
+  const canEdit = 
+    userId === comment.userId;
+
+  const ratingChanged = (newRating) => {
+    updateComment(comment.content, newRating, comment.id);
+  };
+
   return (
     <div key={comment.id} className="comment">
       <div className="comment-image-container">
@@ -40,32 +33,20 @@ const Comment = ({
       </div>
       <div className="comment-right-part">
         <div className="comment-content">
-          <div className="comment-author">{comment.username}</div>
-          <div>{createdAt}</div>
+          <div className="comment-author">{comment.userName}</div>
+          <div>{comment.createdAt}</div>
         </div>
-        {!isEditing && <div className="comment-text">{comment.body}</div>}
+        {!isEditing && <div className="comment-text">{comment.content}</div>}
         {isEditing && (
           <CommentForm
-            submitLabel="Update"
+            submitLabel="Cập nhật"
             hasCancelButton
-            initialText={comment.body}
-            handleSubmit={(text) => updateComment(text, comment.id)}
-            handleCancel={() => {
-              setActiveComment(null);
-            }}
+            initialText={comment.content}
+            handleSubmit={(text) => updateComment(text, comment.ratingStar, comment.id)}
+            handleCancel={() => setActiveComment(null)}
           />
         )}
         <div className="comment-actions">
-          {canReply && (
-            <div
-              className="comment-action"
-              onClick={() =>
-                setActiveComment({ id: comment.id, type: "replying" })
-              }
-            >
-              Trả lời
-            </div>
-          )}
           {canEdit && (
             <div
               className="comment-action"
@@ -86,35 +67,13 @@ const Comment = ({
           )}
         </div>
         <ReactStars  className="star-rating"
+              value={comment.ratingStar}
               count={5}
+              edit={userId === comment.userId}
               onChange={ratingChanged}
               size={24}
               activeColor="#ffd700"
             />
-        {isReplying && (
-          <CommentForm
-            submitLabel="Trả lời"
-            handleSubmit={(text) => addComment(text, replyId)}
-          />
-        )}
-        {replies.length > 0 && (
-          <div className="replies">
-            {replies.map((reply) => (
-              <Comment
-                comment={reply}
-                key={reply.id}
-                setActiveComment={setActiveComment}
-                activeComment={activeComment}
-                updateComment={updateComment}
-                deleteComment={deleteComment}
-                addComment={addComment}
-                parentId={comment.id}
-                replies={[]}
-                currentUserId={currentUserId}
-              />
-            ))}
-          </div>
-        )}
       </div>
     </div>
   );
