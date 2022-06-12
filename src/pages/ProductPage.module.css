@@ -89,3 +89,26 @@
 Button:hover {
 	background-color: #f8f4f4;
 }
+
+.quantity_wrapper input {
+	width: 30px;
+	border-left: none;
+	border-right: none;
+	text-align: center;
+}
+
+.quantity_wrapper button {
+	background-color: white;
+}
+
+.increase_button {
+	border-left: none;
+	border-top-right-radius: 28px;
+	border-bottom-right-radius: 28px;
+}
+
+.decrease_button {
+	border-right: none;
+	border-top-left-radius: 28px;
+	border-bottom-left-radius: 28px;
+}
