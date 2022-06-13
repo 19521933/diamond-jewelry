@@ -22,15 +22,17 @@ export default function Login() {
 			const googleProvider = new fbAuth.GoogleAuthProvider();
 			const oathResponse = await fbAuth2.signInWithPopup(googleProvider);
 			const userData = oathResponse.user.providerData[0];
-			const response = await axios.post(process.env.REACT_APP_API_URL + "/auth/signup", {
-				fullName: userData.displayName,
-				email: userData.email,
-				tel: userData.phoneNumber,
-				image: userData.photoURL,
-				provider: "GOOGLE",
-				role: "USER"
-			}, {
-				headers: { "Access-Control-Allow-Origin": '*' }
+			const response = await axios({
+				method: 'post',
+				url: process.env.REACT_APP_API_URL + "/auth/signup",
+				data: {
+					fullName: userData.displayName,
+					email: userData.email,
+					tel: userData.phoneNumber,
+					password: '123456',
+					provider: "GOOGLE",
+					role: "USER"
+				}
 			});
 			console.log(response);
 		}
