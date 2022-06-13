@@ -91,10 +91,10 @@ Button:hover {
 }
 
 .quantity_wrapper input {
-	width: 30px;
-	border-left: none;
-	border-right: none;
-	text-align: center;
+    width: 30px;
+    text-align: center;
+    padding: -8px 10px;
+    border-radius: 5px;
 }
 
 .quantity_wrapper button {
@@ -111,4 +111,15 @@ Button:hover {
 	border-right: none;
 	border-top-left-radius: 28px;
 	border-bottom-left-radius: 28px;
+}
+
+.hearticon{
+	margin-top: 25px;
+	display: flex;
+}
+
+.nameHeart{
+	font-size: 20px;
+	opacity: 80%;
+	margin: 0px 3px;
 }

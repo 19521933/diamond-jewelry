@@ -4,7 +4,6 @@ import Comment from "./Comment.js";
 import './comment.css';
 import axios from 'axios';
 import ls from 'local-storage';
-import { get } from "jquery";
 
 const Comments = ({ productId }) => {
   const [commentList, setCommentList] = useState([]);

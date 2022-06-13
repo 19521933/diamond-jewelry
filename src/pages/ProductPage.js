@@ -12,6 +12,7 @@ import $ from 'jquery';
 import Swal from 'sweetalert2';
 
 import '../components/comment.css';
+import { Link } from 'react-router-dom';
 
 const ProductPage = () => {
 	const [quantity, setQuantity] = useState(1);
@@ -54,7 +55,6 @@ const ProductPage = () => {
 		const value = parseInt(event.target.value) > 0 ? parseInt(event.target.value) : 0;
 		setQuantity(value);
 	}
-
 	const handleAddToCartButton = async () => {
         const response = await axios({
             method: 'put',
@@ -70,6 +70,7 @@ const ProductPage = () => {
 			});
 		  }
 	}
+let iconStyles = { color: "red", fontSize: "1.5em" };
 
 	return (
 		<div className={styles.Container}>
@@ -94,6 +95,12 @@ const ProductPage = () => {
 								<button className={styles.increase_button} onClick={increaseQuantity}>+</button>
 							</div>
 							<button onClick={handleAddToCartButton} className={styles.Button}>THÊM VÀO GIỎ HÀNG</button>
+						</div>
+						<div className={styles.hearticon} >
+							<Link to="/yeu-thich">
+								<ion-icon name="heart" style={iconStyles}></ion-icon>
+							</Link>
+							<div className={styles.nameHeart}>Thêm vào danh sách yêu thích</div>
 						</div>
 					</div>
 
