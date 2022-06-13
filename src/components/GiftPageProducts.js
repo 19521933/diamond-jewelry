@@ -5,11 +5,12 @@ import styles from "./GiftPageProducts.module.css"
 import axios from 'axios';
 
 const GiftPageProducts = ({filters}) => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState();
   let params = {};
 	params.group = "Quà tặng";
 	if (filters.brand !== undefined && filters.brand !== "Tất cả") { params.brand = filters.brand; }
 	if (filters.material !== undefined  && filters.material !== "Tất cả") { params.material = filters.material; }
+  if (filters.chainMaterial !== undefined  && filters.chainMaterial !== "Tất cả") { params.chainMaterial = filters.chainMaterial; }
   if (filters.type !== undefined  && filters.type !== "Tất cả") { params.type = filters.type; }
 	if (filters.gender !== undefined  && filters.gender !== "Hiển thị tất cả") { params.gender = filters.gender; }
 	if (filters.color !== undefined  && filters.color !== "Tất cả") { params.color = filters.color; }
@@ -27,9 +28,9 @@ const GiftPageProducts = ({filters}) => {
     <>
       <div className={styles.Title}>CÁC SẢN PHẨM QUÀ TẶNG</div>
       <div className={styles.Container}>
-      {products.map((product) => (
-					<Product product={product} key={product.id} />
-				))}
+      {(products && products.length === 0) ? (<div className={styles.None}>Không có sản phẩm nào phù hợp</div>)  : (products?.map((product) => (
+          <Product product={product} key={product.id} />
+      )))}
       </div>
     </>
   )

@@ -9,12 +9,12 @@ import styles from "./GiftPage.module.css"
 const GiftPage = () => {
     const [brand, setBrand] = useState();
     const [material, setMaterial] = useState();
+    const [chainMaterial, setChainMaterial] = useState();
     const [type, setType] = useState();
     const [gender, setGender] = useState();
-    const [color, setColor] = useState();
     const [sortMode, setSortMode] = useState();
 
-    const filters = { brand, material, type, gender, color, sortMode };
+    const filters = { brand, material, chainMaterial, type, gender, sortMode };
 
     return (
         <div className={styles.Container}>
@@ -41,6 +41,19 @@ const GiftPage = () => {
                         <option value={"Tất cả"} className={styles.Option}>Tất cả</option>
                     </select>
 
+                    <select value={chainMaterial} onChange={(e) => setChainMaterial(e.target.value)} className={styles.Select}>
+                        <option className={styles.Option} disabled selected>Chất liệu dây</option>
+                        <option value={"Không gắn đá"} className={styles.Option}>Không gắn đá</option>
+                        <option value={"Kim cương"} className={styles.Option}>Kim cương</option>
+                        <option value={"Ngọc trai"} className={styles.Option}>Ngọc trai</option>
+                        <option value={"Moon"} className={styles.Option}>Moon</option>
+                        <option value={"Jadeite"} className={styles.Option}>Jadeite</option>
+                        <option value={"Ruby"} className={styles.Option}>Ruby</option>
+                        <option value={"Sythetic"} className={styles.Option}>Sythetic</option>
+                        <option value={"Xoàn mỹ"} className={styles.Option}>Xoàn mỹ</option>
+                        <option value={"Tất cả"} className={styles.Option}>Tất cả</option>
+                    </select>
+
                     <select value={type} onChange={(e) => setType(e.target.value)} className={styles.Select}>
                         <option className={styles.Option} disabled selected>Loại trang sức</option>
                         <option value={"Dây cổ"} className={styles.Option}>Dây cổ</option>
@@ -59,18 +72,6 @@ const GiftPage = () => {
                         <option value={"Trẻ em"} className={styles.Option}>Trẻ em</option>
                         <option value={"Tất cả"} className={styles.Option}>Tất cả</option>
                         <option value={"Hiển thị tất cả"} className={styles.Option}>Hiển thị tất cả</option>
-                    </select>
-
-                    <select value={color} onChange={(e) => setColor(e.target.value)} className={styles.Select}>
-                        <option className={styles.Option} disabled selected>Màu chất liệu</option>
-                        <option value={"Trắng"} className={styles.Option}>Trắng</option>
-                        <option value={"Xanh"} className={styles.Option}>Xanh</option>
-                        <option value={"Vàng"} className={styles.Option}>Vàng</option>
-                        <option value={"Đen"} className={styles.Option}>Đen</option>
-                        <option value={"Bạc"} className={styles.Option}>Bạc</option>
-                        <option value={"Cam"} className={styles.Option}>Cam</option>
-                        <option value={"Đỏ"} className={styles.Option}>Đỏ</option>
-                        <option value={"Tất cả"} className={styles.Option}>Tất cả</option>
                     </select>
                 </div>
 

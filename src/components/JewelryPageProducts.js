@@ -4,11 +4,12 @@ import styles from "./JewelryPageProducts.module.css"
 import axios from 'axios';
 
 const JewelryPageProducts = ({filters}) => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState();
   let params = {};
   params.group = "Trang sức";
   if (filters.brand !== undefined && filters.brand !== "Tất cả") { params.brand = filters.brand; }
   if (filters.material !== undefined  && filters.material !== "Tất cả") { params.material = filters.material; }
+  if (filters.chainMaterial !== undefined  && filters.chainMaterial !== "Tất cả") { params.chainMaterial = filters.chainMaterial; }
   if (filters.type !== undefined  && filters.type !== "Tất cả") { params.type = filters.type; }
   if (filters.purity !== undefined  && filters.purity !== "Tất cả") { params.purity = filters.purity; }
   if (filters.gender !== undefined  && filters.gender !== "Hiển thị tất cả") { params.gender = filters.gender; }
@@ -26,9 +27,9 @@ const JewelryPageProducts = ({filters}) => {
     <>
       <div className={styles.Title}>CÁC SẢN PHẨM TRANG SỨC</div>
       <div className={styles.Container}>
-        {products.map((product) => (
-          <Product product={product} key={product.id} />
-        ))}
+      {(products && products.length === 0) ? (<div className={styles.None}>Không có sản phẩm nào phù hợp</div>)  : (products?.map((product) => (
+        <Product product={product} key={product.id} />
+      )))}
       </div>
     </>
   )

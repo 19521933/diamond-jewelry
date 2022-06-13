@@ -4,7 +4,7 @@ import styles from "./WatchPageProducts.module.css"
 import axios from 'axios';
 
 const WatchPageProducts = ({filters}) => {
-	const [products, setProducts] = useState([]);
+	const [products, setProducts] = useState();
 	let params = {};
 	params.group = "Đồng hồ";
 	if (filters.brand !== undefined && filters.brand !== "Tất cả") { params.brand = filters.brand; }
@@ -25,9 +25,9 @@ const WatchPageProducts = ({filters}) => {
 		<>
 			<div className={styles.Title}>CÁC SẢN PHẨM ĐỒNG HỒ</div>
 			<div className={styles.Container}>
-				{products.map((product) => (
-					<Product product={product} key={product.id} />
-				))}
+			{(products && products.length === 0) ? (<div className={styles.None}>Không có sản phẩm nào phù hợp</div>)  : (products?.map((product) => (
+            	<Product product={product} key={product.id} />
+          	)))}
 			</div>
 		</>
 	)

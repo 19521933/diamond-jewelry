@@ -16,3 +16,12 @@
     color: #59a8a9;
     font-family: 'Charis SIL', serif;
 }
+
+.None {
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 2px;
+    font-family: 'Charis SIL', serif;
+}

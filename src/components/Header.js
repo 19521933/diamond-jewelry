@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import ls from 'local-storage';
 import styles from './Header.module.css';
 import Navbar from './Navbar.js';
+import Swal from 'sweetalert2';
 
 export default function Header() {
     const navigate = useNavigate();
@@ -10,6 +11,17 @@ export default function Header() {
         ls.remove("accessToken");
         ls.remove("userId");
         navigate("/");
+    }
+
+    const handleDirectProfile = (e) => {
+        if (ls.get("userId") == null) {
+            e.preventDefault();
+            Swal.fire({
+				icon: 'info',
+				title: 'Yêu cầu đăng nhập',
+				text: 'Để vào trang cá nhân, bạn cần đăng nhập'
+			});
+        }
     }
 
     return (
@@ -40,7 +52,7 @@ export default function Header() {
                     
                     <li>
                         <ion-icon name="person-outline"></ion-icon>
-                        <Link to="/tai-khoan">Tài khoản</Link>
+                        <Link to="/tai-khoan" onClick={handleDirectProfile}>Tài khoản</Link>
                     </li>
                 </ul>
             </div>

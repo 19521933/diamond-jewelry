@@ -56,9 +56,10 @@ const WatchPage = () => {
 
                     <select value={chainMaterial} onChange={(e) => setChainMaterial(e.target.value)} className={styles.Select}>
                         <option className={styles.Option} disabled selected>Chất liệu dây</option>
-                        <option value={"Cao Su Cao Cấp"} className={styles.Option}>Cao Su Cao Cấp</option>
+                        <option value={"Cao Su Cao Cấp"} className={styles.Option}>Cao su cao cấp</option>
                         <option value={"Da"} className={styles.Option}>Da</option>
                         <option value={"Thép Không Gỉ"} className={styles.Option}>Thép Không Gỉ</option>
+                        <option value={"Kim loại"} className={styles.Option}>Kim loại</option>
                         <option value={"Tất cả"} className={styles.Option}>Tất cả</option>
                     </select>
                 </div>

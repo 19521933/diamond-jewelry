@@ -9,13 +9,14 @@ import styles from "./JewelryPage.module.css"
 const JewelryPage = () => {
     const [brand, setBrand] = useState();
     const [material, setMaterial] = useState();
+    const [chainMaterial, setChainMaterial] = useState();
     const [type, setType] = useState();
     const [purity, setPurity] = useState();
     const [gender, setGender] = useState();
     const [color, setColor] = useState();
     const [sortMode, setSortMode] = useState();
 
-    const filters = { brand, material, type, purity, gender, color, sortMode };
+    const filters = { brand, material, chainMaterial, type, purity, gender, color, sortMode };
 
     return (
         <div className={styles.Container}>
@@ -38,6 +39,18 @@ const JewelryPage = () => {
                         <option value={"Bạc"} className={styles.Option}>Bạc</option>
                         <option value={"Kim cương"} className={styles.Option}>Kim Cương</option>
                         <option value={"Thạch Anh"} className={styles.Option}>Thạch Anh</option>
+                        <option value={"Tất cả"} className={styles.Option}>Tất cả</option>
+                    </select>
+
+                    <select value={chainMaterial} onChange={(e) => setChainMaterial(e.target.value)} className={styles.Select}>
+                        <option className={styles.Option} disabled selected>Chất liệu dây</option>
+                        <option value={"Citrine"} className={styles.Option}>Citrine</option>
+                        <option value={"Không gắn đá"} className={styles.Option}>Không gắn đá</option>
+                        <option value={"Ngọc trai"} className={styles.Option}>Ngọc trai</option>
+                        <option value={"Ruby"} className={styles.Option}>Ruby</option>
+                        <option value={"Sythetic"} className={styles.Option}>Sythetic</option>
+                        <option value={"Topaz"} className={styles.Option}>Topaz</option>
+                        <option value={"Xoàn mỹ"} className={styles.Option}>Xoàn mỹ</option>
                         <option value={"Tất cả"} className={styles.Option}>Tất cả</option>
                     </select>
 

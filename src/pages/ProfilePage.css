@@ -47,13 +47,13 @@
 		0 2px 6px 0 rgb(206 206 238 / 54%);
 }
 
-.bootstrap .card-body {
-	/* -ms-flex: 1 1 auto;
+/* .bootstrap .card-body {
+	-ms-flex: 1 1 auto;
 	flex: 1 1 auto;
 	min-height: 1px;
 	padding: 1.25rem;
-	height: 500px; */
-}
+	height: 500px; 
+} */
 
 .bootstrap .me-2 {
 	margin-right: 0.5rem !important;
