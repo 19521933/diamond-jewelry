@@ -17,14 +17,14 @@ export default function Login() {
 	}, []);
 
 
-	function onSuccess(response) {
-		localStorage.setItem("accessToken", response.accessToken);
-		navigate("/");
-	}
+	// function onSuccess(response) {
+	// 	localStorage.setItem("accessToken", response.accessToken);
+	// 	navigate("/");
+	// }
 
-	function onFailure(response) {
-		console.log(response);
-	}
+	// function onFailure(response) {
+	// 	console.log(response);
+	// }
 
 	async function handleFormSubmit(event) {
 		try {

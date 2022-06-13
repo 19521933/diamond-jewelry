@@ -1,11 +1,61 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './Navbar.module.css';
+import { Autocomplete } from '@mui/material';
+import TextField from '@mui/material/TextField';
+import { useEffect } from 'react';
+import axios from 'axios';
+import tvkd from 'tieng-viet-khong-dau';
 
 export default function Navbar() {
+    const navigate = useNavigate();
+    let suggestions = [];
+    useEffect(() => {
+        async function fetchData() {
+            const response = await axios.get()
+        }
+        fetchData();
+    }, []);
+
+    async function handleChange(event) {
+        const response = await axios.get(process.env.REACT_APP_API_URL + "/products/searchTitle", { params: event.target.textContent });
+        navigate(`/san-pham/${response.data.id}/${tvkd.cFriendlyURI(response.data.title)}`);
+    }
+
+    suggestions = [
+        "Channel",
+        "CodingLab",
+        "CodingNepal",
+        "YouTube",
+        "YouTuber",
+        "YouTube Channel",
+        "Blogger",
+        "Bollywood",
+        "Vlogger",
+        "Vechiles",
+        "Facebook",
+        "Freelancer",
+        "Facebook Page",
+        "Designer",
+        "Developer",
+        "Web Designer",
+        "Web Developer",
+        "Login Form in HTML & CSS",
+        "How to learn HTML & CSS",
+        "How to learn JavaScript",
+        "How to became Freelancer",
+        "How to became Web Designer",
+        "How to start Gaming Channel",
+        "How to start YouTube Channel",
+        "What does HTML stands for?",
+        "What does CSS stands for?",
+    ];
+
+    
+
     return (
         <nav className={styles.menu_container}>
             <Link to="/" className={`${styles.menu_logo} ${styles.left_wrapper}`}>
-                <img src={ require("../assets/images/logo.png") } alt="logo" />
+                <img src={require("../assets/images/logo.png")} alt="logo" />
             </Link>
 
             <div className={styles.menu}>
@@ -37,14 +87,25 @@ export default function Navbar() {
                     </li>
                 </ul>
             </div>
-            
+
             <div className={styles.menu}>
                 <ul className={styles.right_wrapper}>
                     <li>
-                        <form action="">
-                            <input type="search" placeholder="Search here ..."></input>
-                            <ion-icon class="md hydrated search-icon" name="search-outline"></ion-icon>
-                        </form>
+                        <Autocomplete
+                            disablePortal
+                            id="search box"
+                            options={suggestions}
+                            sx={{ width: 300 }}
+                            size="small"
+                            renderInput={(params) => <TextField {...params} label="Tìm kiếm" />}
+                            onChange={handleChange}
+                        />
+                        {/* <form class={styles.search}>
+                            <input type="text" class={styles.searchTerm} placeholder="Tìm kiếm" />
+                            <button type="submit" class={styles.searchButton}>
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </form> */}
                     </li>
                     <li>
                         <Link to="/yeu-thich">
