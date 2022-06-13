@@ -159,7 +159,7 @@ export default function Login() {
 							className={styles.button}
 							onClick={signInWithGithub}
 						>
-							<img className={styles.icon} src={require("../assets/images/github.png")} alt="facebook-icon" />
+							<img className={styles.icon} src={require("../assets/images/github.png")} alt="github-icon" />
 						</div>
 					</div>
 				</form>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Product from "./Product"
 import styles from "./WatchPageProducts.module.css"
 import axios from 'axios';
+import NoProductFound from './NoProductFound';
 
 const WatchPageProducts = ({filters}) => {
 	const [products, setProducts] = useState([]);
@@ -29,6 +30,7 @@ const WatchPageProducts = ({filters}) => {
 					<Product product={product} key={product.id} />
 				))}
 			</div>
+			{(products.length === 0) && <NoProductFound />}
 		</>
 	)
 }
