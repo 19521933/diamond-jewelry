@@ -24,7 +24,9 @@ export default function RegisterPage() {
             const tel = $("#tel")[0].value;
             const email = $("#email")[0].value;
             const password = $("#password")[0].value;
-            const response = await axios.post(process.env.REACT_APP_API_URL + "/auth/signup", { fullName, dob, tel, email, password });
+            const role = "USER";
+            const provider = "LOCAL";
+            const response = await axios.post(process.env.REACT_APP_API_URL + "/auth/signup", { fullName, dob, tel, email, password, role, provider });
 
             if (response.status === 200) {
                 showSuccessPopup();

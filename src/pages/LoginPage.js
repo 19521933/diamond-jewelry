@@ -5,6 +5,7 @@ import ls from 'local-storage';
 import $ from 'jquery';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { fbAuth, fbAuth2 } from '../firebase/firebase.js'
 
 
 export default function Login() {
@@ -16,15 +17,35 @@ export default function Login() {
 		}
 	}, []);
 
-
-	function onSuccess(response) {
-		localStorage.setItem("accessToken", response.accessToken);
-		navigate("/");
+	async function signInWithGoogle() {
+		try {
+			const googleProvider = new fbAuth.GoogleAuthProvider();
+			const oathResponse = await fbAuth2.signInWithPopup(googleProvider);
+			const userData = oathResponse.user.providerData[0];
+			const response = await axios.post(process.env.REACT_APP_API_URL + "/auth/signup", {
+				fullName: userData.displayName,
+				email: userData.email,
+				tel: userData.phoneNumber,
+				image: userData.photoURL,
+				provider: "GOOGLE",
+				role: "USER"
+			}, {
+				headers: { "Access-Control-Allow-Origin": '*' }
+			});
+			console.log(response);
+		}
+		catch (error) {
+			console.log(error);
+		}
 	}
+	// function onSuccess(response) {
+	// 	localStorage.setItem("accessToken", response.accessToken);
+	// 	navigate("/");
+	// }
 
-	function onFailure(response) {
-		console.log(response);
-	}
+	// function onFailure(response) {
+	// 	console.log(response);
+	// }
 
 	async function handleFormSubmit(event) {
 		try {
@@ -65,26 +86,27 @@ export default function Login() {
 					<div className={styles.thirdpartywrapper}>
 						<div
 							className={styles.button}
-							responseType="token"
-							redirectUri="http://localhost:3000/auth/google/diamonjewelry"
-							scope="profile"
+							// responseType="token"
+							// redirectUri="http://localhost:3000/auth/google/diamonjewelry"
+							// scope="profile"
+							onClick={signInWithGoogle}
 						>
 							<img className={styles.icon} src={require("../assets/images/google.png")} alt="google-icon" />
 						</div>
 						<div
 							className={styles.button}
-							responseType="token"
-							redirectUri="http://localhost:3000/auth/facebook/diamonjewelry"
-							scope="public_profile"
+						// responseType="token"
+						// redirectUri="http://localhost:3000/auth/facebook/diamonjewelry"
+						// scope="public_profile"
 						>
 							<img className={styles.icon} src={require("../assets/images/facebook.png")} alt="facebook-icon" />
 						</div>
 
 						<div
 							className={styles.button}
-							responseType="token"
-							redirectUri="http://localhost:3000/auth/facebook/diamonjewelry"
-							scope="public_profile"
+						// responseType="token"
+						// redirectUri="http://localhost:3000/auth/facebook/diamonjewelry"
+						// scope="public_profile"
 						>
 							<img className={styles.icon} src={require("../assets/images/instagram.png")} alt="facebook-icon" />
 						</div>
