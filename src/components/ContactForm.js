@@ -6,6 +6,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from 'axios';
 import { FormatItalic, FormatLineSpacing } from "@material-ui/icons";
+import Swal from 'sweetalert2';
 
 export default function ContactForm() {
   const formik = useFormik({
@@ -28,12 +29,9 @@ export default function ContactForm() {
     }),
   });
 
-  const handleForm = (event) => {
+  const handleForm = async (event) => {
     event.preventDefault();
-    alert(
-      `The name: ${formik.values.name} ; The Email: ${formik.values.email}; The content: ${formik.values.content}`
-    );
-    const response = axios({
+    const response = await axios({
       method: 'post',
       url: process.env.REACT_APP_API_URL + `/contacts`,
       data: {
@@ -41,11 +39,19 @@ export default function ContactForm() {
         senderEmail: formik.values.email,
         content: formik.values.content 
       }
-    }).then(formik.setValues({
+    });
+    if (response.status === 201) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Thành công',
+        text: 'Gửi thông tin liên hệ thành công',
+        });
+    }
+    formik.setValues({
       name: "",
       email: "",
       content: "",
-    }));
+    });
   };
 
   return (

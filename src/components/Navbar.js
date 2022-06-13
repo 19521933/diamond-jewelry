@@ -5,6 +5,9 @@ import TextField from '@mui/material/TextField';
 import { useEffect } from 'react';
 import axios from 'axios';
 import tvkd from 'tieng-viet-khong-dau';
+import ls from 'local-storage'
+import Swal from 'sweetalert2';
+
 
 export default function Navbar() {
     const navigate = useNavigate();
@@ -25,37 +28,29 @@ export default function Navbar() {
         }
     }
 
-    // suggestions = [
-    //     "Dây cổ da PNJSilver",
-    //     "Channel",
-    //     "CodingLab",
-    //     "CodingNepal",
-    //     "YouTube",
-    //     "YouTuber",
-    //     "YouTube Channel",
-    //     "Blogger",
-    //     "Bollywood",
-    //     "Vlogger",
-    //     "Vechiles",
-    //     "Facebook",
-    //     "Freelancer",
-    //     "Facebook Page",
-    //     "Designer",
-    //     "Developer",
-    //     "Web Designer",
-    //     "Web Developer",
-    //     "Login Form in HTML & CSS",
-    //     "How to learn HTML & CSS",
-    //     "How to learn JavaScript",
-    //     "How to became Freelancer",
-    //     "How to became Web Designer",
-    //     "How to start Gaming Channel",
-    //     "How to start YouTube Channel",
-    //     "What does HTML stands for?",
-    //     "What does CSS stands for?",
-    // ];
+    const userId = ls.get("userId");
 
-    
+    const handleDirectCartPage = (e) => {
+        if (userId == null) {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'info',
+                title: 'Yêu cầu đăng nhập',
+                text: 'Bạn cần đăng nhập để vào trang giỏ hàng'
+            });
+        }
+    }
+
+    const handleDirectLikePage = (e) => {
+        if (userId == null) {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'info',
+                title: 'Yêu cầu đăng nhập',
+                text: 'Bạn cần đăng nhập để vào trang yêu thích'
+            });
+        }
+    }
 
     return (
         <nav className={styles.menu_container}>
@@ -113,13 +108,13 @@ export default function Navbar() {
                         </form> */}
                     </li>
                     <li>
-                        <Link to="/yeu-thich">
+                        <Link onClick={handleDirectLikePage} to="/yeu-thich">
                             <ion-icon name="heart-outline"></ion-icon>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/gio-hang">
-                            <ion-icon name="bag-handle-outline"></ion-icon>
+                        <Link onClick={handleDirectCartPage} to="/gio-hang">
+                            <ion-icon name="bag-handle-outline" alt="Giỏ hàng"></ion-icon>
                         </Link>
                     </li>
                 </ul>

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import './comment.css';
+import ls from 'local-storage';
+import Swal from 'sweetalert2';
 
 const CommentForm = ({
   handleSubmit,
@@ -8,12 +10,23 @@ const CommentForm = ({
   handleCancel,
   initialText = "",
 }) => {
+  const userId = ls.get('userId');
+
   const [text, setText] = useState(initialText);
   const isTextareaDisabled = text.length === 0;
   const onSubmit = (event) => {
     event.preventDefault();
-    handleSubmit(text);
-    setText("");
+    if (userId === null) {
+      Swal.fire({
+				icon: 'info',
+				title: 'Yêu cầu đăng nhập',
+				text: 'Bạn cần đăng nhập để thực hiện chức năng bình luận',
+			});
+    }
+    else {
+      handleSubmit(text);
+      setText("");
+    }
   };
   return (
     <form onSubmit={onSubmit}>
@@ -31,7 +44,7 @@ const CommentForm = ({
           className="comment-form-button comment-form-cancel-button"
           onClick={handleCancel}
         >
-          Cancel
+          Hủy
         </button>
       )}
     </form>

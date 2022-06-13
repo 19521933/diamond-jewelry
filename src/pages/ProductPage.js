@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Announcement from '../components/Announcement'
+import Product from "../components/Product"
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Newsletter from '../components/Newsletter'
@@ -8,14 +9,15 @@ import styles from "./ProductPage.module.css"
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import ls from 'local-storage';
-import $ from 'jquery';
 import Swal from 'sweetalert2';
-
 import '../components/comment.css';
 
 const ProductPage = () => {
 	const [quantity, setQuantity] = useState(1);
+	const [product, setProduct] = useState();
 	const { productId } = useParams();
+	const [relatedProducts, setRelatedProducts] = useState([]);
+	const [isLiked, setIsLiked] = useState(false);
 
 	const userId = ls.get("userId");
     const accessToken = ls.get("accessToken");
@@ -30,11 +32,37 @@ const ProductPage = () => {
 			if (response.status === 200) {
 				// format currency
 				const formattedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(response.data.price);
+				response.data.price = formattedPrice;
+				setProduct(response.data);
 
-				$("#productImage")[0].src = response.data.image;
-				$("#productTitle")[0].textContent = response.data.title;
-				$("#productDescription")[0].textContent = response.data.description;
-				$("#productPrice")[0].textContent = formattedPrice;
+				const response1 = await axios.get(
+					process.env.REACT_APP_API_URL + "/products",
+					{params: {
+						group: response.data.group,
+						brand: response.data.details.brand,
+						limit: 4
+					}}
+				)
+				setRelatedProducts(response1.data);
+			}
+		}
+		fetchData();
+	}, [productId]);
+
+	useEffect(() => {
+		async function fetchData() {
+			if (userId !== null) {
+				const response = await axios({
+					method: 'get',
+					url: process.env.REACT_APP_API_URL + `/users/existsLikedProduct/${userId}`,
+					params: {
+						productId: productId
+					},
+					headers: {
+						'Authorization': 'Bearer ' + accessToken
+					}
+				})
+				setIsLiked(response.data);
 			}
 		}
 		fetchData();
@@ -56,20 +84,81 @@ const ProductPage = () => {
 	}
 
 	const handleAddToCartButton = async () => {
-        const response = await axios({
-            method: 'put',
-            url: process.env.REACT_APP_API_URL + `/carts/addItem/${userId}`,
-            data: {id: productId, quantity: quantity},
-            headers: {'Authorization': 'Bearer ' + accessToken}
-        });
-		if (response.status === 200) {
-			Swal.fire({
-			  icon: 'success',
-			  title: 'Thành công',
-			  text: 'Sản phẩn đã được thêm vào giỏ hàng',
+		if (userId !== null) {
+			const response = await axios({
+				method: 'put',
+				url: process.env.REACT_APP_API_URL + `/carts/addItem/${userId}`,
+				data: {id: productId, quantity: quantity},
+				headers: {'Authorization': 'Bearer ' + accessToken}
 			});
-		  }
+			if (response.status === 200) {
+				Swal.fire({
+				icon: 'success',
+				title: 'Thành công',
+				text: 'Sản phẩm đã được thêm vào giỏ hàng',
+				});
+			}
+		}
+		else {
+			Swal.fire({
+				icon: 'info',
+				title: 'Yêu cầu đăng nhập',
+				text: 'Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng',
+				});
+		}
 	}
+
+	const handleLikeButton = async () => {
+		if (userId !== null) {
+			if (!isLiked) {
+				const response = await axios({
+					method: 'put',
+					url: process.env.REACT_APP_API_URL + `/users/addLikedProduct/${userId}`,
+					data: productId,
+					headers: {
+						'Authorization': 'Bearer ' + accessToken,
+						'Content-Type': 'application/text'
+					}
+				});
+				if (response.status === 200) {
+					setIsLiked(true);
+					Swal.fire({
+					icon: 'success',
+					title: 'Thành công',
+					text: 'Sản phẩm đã được thêm vào danh sách yêu thích',
+					});
+				}
+			}
+		else {
+			const response = await axios({
+				method: 'put',
+				url: process.env.REACT_APP_API_URL + `/users/removeLikedProduct/${userId}`,
+				data: productId,
+				headers: {
+					'Authorization': 'Bearer ' + accessToken,
+					'Content-Type': 'application/text'
+				}
+			});
+				if (response.status === 200) {
+					setIsLiked(false);
+					Swal.fire({
+					icon: 'success',
+					title: 'Thành công',
+					text: 'Sản phẩm đã được gỡ bỏ khỏi danh sách yêu thích',
+					});
+				}
+			}
+		}
+		else {
+			Swal.fire({
+				icon: 'info',
+				title: 'Yêu cầu đăng nhập',
+				text: 'Bạn cần đăng nhập để thêm sản phẩm vào danh sách yêu thích',
+				});
+		}
+	}
+
+let iconStyles = { color: "red", fontSize: "3em" };
 
 	return (
 		<div className={styles.Container}>
@@ -79,13 +168,13 @@ const ProductPage = () => {
 			<div className={styles.WrapperContainer}>
 				<div className={styles.Wrapper}>
 					<div className={styles.ImgContainer}>
-						<img id='productImage' className={styles.Image} alt="" src="https://media.tiffany.com/is/image/Tiffany/EcomBrowseM/tiffany-1837makers-27-mm-square-watch-67460677_1003451_ED.jpg?fmt=webp"></img>
+						<img id='productImage' className={styles.Image} alt="" src={product ? product.image : ''}></img>
 					</div>
 					<div className={styles.InfoContainer}>
-						<h1 id='productTitle' className={styles.Title}>Vine Ring</h1>
+						<h1 id='productTitle' className={styles.Title}>{product ? product.title : ''}</h1>
 						<div className={styles.Detail}>Mô tả chi tiết:</div>
-						<p id='productDescription' className={styles.Desc}>Nspired by nature, Tiffany Victoria captures the beauty of flowers and vines with a mix of expertly cut diamonds. This ring features a round tanzanite at its center and an organic vine motif of marquise diamonds. Creating color, light and movement, Tiffany Victoria designs are proof that more diamonds are always better.</p>
-						<span id='productPrice' className={styles.Price}>$15.000</span>
+						<p id='productDescription' className={styles.Desc}>{product ? product.description : ''}</p>
+						<span id='productPrice' className={styles.Price}>{product ? product.price : ''}</span>
 
 						<div className={styles.AddContainer}>
 							<div className={styles.quantity_wrapper}>
@@ -93,17 +182,23 @@ const ProductPage = () => {
 								<input type="number" value={quantity} onChange={handleChange} />
 								<button className={styles.increase_button} onClick={increaseQuantity}>+</button>
 							</div>
+							<div onClick={handleLikeButton} className={styles.hearticon} >
+								{isLiked ? 
+								(<ion-icon name="heart" style={iconStyles}/>)
+								: (<ion-icon name="heart-outline" style={iconStyles}/>)}
+							</div>
 							<button onClick={handleAddToCartButton} className={styles.Button}>THÊM VÀO GIỎ HÀNG</button>
 						</div>
 					</div>
-
 				</div>
-
 			</div>
-			<Comments
-			   commentsUrl="http://localhost:3004/comments"
-			   currentUserId="1"
-			 />
+			<Comments key={productId} productId={productId}/>
+			<div className={styles.RelatedTitle}>CÁC SẢN PHẨM LIÊN QUAN</div>
+			<div className={styles.RelatedContainer}>
+				{relatedProducts.map((product) => (
+					<Product product={product} key={product.id} />
+				))}
+			</div>
 			<Newsletter />
 			<Footer />
 		</div>

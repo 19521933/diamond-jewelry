@@ -8,6 +8,7 @@ export default function Header() {
 
     function handleLogout() {
         ls.remove("accessToken");
+        ls.remove("userId");
         navigate("/");
     }
 
