@@ -4,7 +4,7 @@ import styles from "./Announcement.module.css"
 const Announcement = () => {
   return (
     <div className={styles.Container}>
-      Super Deal! Free Shipping on Orders Over $50
+         Ưu đãi siêu khủng! Giao hàng miễn phí cho các đơn đặt hàng trên 100$
     </div>
   )
 }
