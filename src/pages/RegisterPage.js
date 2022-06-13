@@ -1,7 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import $ from 'jquery';
 import ls from 'local-storage';
-import OAuth2Login from 'react-simple-oauth2-login';
 import styles from './RegisterPage.module.css';
 import { ArrowLeft } from '@material-ui/icons';
 import axios from 'axios';
@@ -141,33 +140,6 @@ export default function RegisterPage() {
                     <input id='confirmPassword' type='password' placeholder='Xác nhận mật khẩu' onChange={validateConfirmPassword} required />
 
                     <button className={styles.signup_button} type="submit">Đăng kí</button>
-                    <div className={styles.third_party_wrapper}>
-                        <OAuth2Login
-                            className={styles.button}
-                            authorizationUrl="https://accounts.google.com/o/oauth2/auth"
-                            responseType="token"
-                            clientId="633817129267-8ve3g3uk7mhsrdd0elci28as9g7389sr.apps.googleusercontent.com"
-                            redirectUri="http://localhost:3000/auth/google/diamonjewelry"
-                            scope="profile"
-                            onSuccess={onSuccess}
-                            onFailure={onFailure}
-                        >
-                            <img src={require("../assets/images/google.png")} alt="google-icon" />
-                        </OAuth2Login>
-
-                        <OAuth2Login
-                            className={styles.button}
-                            authorizationUrl="https://www.facebook.com/dialog/oauth"
-                            responseType="token"
-                            clientId="5374491585936093"
-                            redirectUri="http://localhost:3000/auth/facebook/diamonjewelry"
-                            scope="public_profile"
-                            onSuccess={onSuccess}
-                            onFailure={onFailure}
-                        >
-                            <img src={require("../assets/images/facebook.png")} alt="facebook-icon" />
-                        </OAuth2Login>
-                    </div>
                 </form>
             </div>
             <div className={styles.banner}>
