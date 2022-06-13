@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Product from "./Product"
 import styles from "./Products.module.css"
 import axios from 'axios';
+import NoProductFound from './NoProductFound';
 
 const HomePageProducts = () => {
   const [products, setProducts] = useState([]);
@@ -20,6 +21,7 @@ const HomePageProducts = () => {
           <Product product={product} key={product.id} />
         ))}
       </div>
+	  {(products.length === 0) && <NoProductFound />}
     </>
   )
 }

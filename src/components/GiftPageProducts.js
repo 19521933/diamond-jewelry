@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { GiftProducts } from '../data'
 import Product from "./Product"
 import styles from "./GiftPageProducts.module.css"
 import axios from 'axios';
+import NoProductFound from './NoProductFound';
 
 const GiftPageProducts = ({filters}) => {
-  const [products, setProducts] = useState();
+  const [products, setProducts] = useState([]);
   let params = {};
 	params.group = "Quà tặng";
 	if (filters.brand !== undefined && filters.brand !== "Tất cả") { params.brand = filters.brand; }
@@ -28,10 +28,11 @@ const GiftPageProducts = ({filters}) => {
     <>
       <div className={styles.Title}>CÁC SẢN PHẨM QUÀ TẶNG</div>
       <div className={styles.Container}>
-      {(products && products.length === 0) ? (<div className={styles.None}>Không có sản phẩm nào phù hợp</div>)  : (products?.map((product) => (
+        {products.map((product) => (
           <Product product={product} key={product.id} />
-      )))}
+        ))}
       </div>
+      {(products.length === 0) && <NoProductFound />}
     </>
   )
 }

@@ -5,6 +5,7 @@ import axios from 'axios';
 import CartItem from '../components/CartItem';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import NoProductFound from '../components/NoProductFound';
 
 const cartData =
     [
@@ -42,7 +43,7 @@ const cartData =
         },
     ]
 
-export default function CartPage() { 
+export default function CartPage() {
     const [cartList, setCartList] = useState([]);
     const [subTotal, setSubTotal] = useState(0);
     const [grandTotal, setGrandTotal] = useState(0);
@@ -57,28 +58,28 @@ export default function CartPage() {
 
     async function fetchData() {
         const response = await axios.get(
-            process.env.REACT_APP_API_URL + `/carts/cartItems/${userId}`, 
-            {headers: {'Authorization': 'Bearer ' + accessToken}});
+            process.env.REACT_APP_API_URL + `/carts/cartItems/${userId}`,
+            { headers: { 'Authorization': 'Bearer ' + accessToken } });
         setCartList(response.data);
     }
 
     useEffect(() => {
         if (userId !== undefined) {
-          fetchData();
+            fetchData();
         }
         else {
-          setCartList(cartData);
+            setCartList(cartData);
         }
     }, []);
 
     useEffect(() => {
         let total = 0;
         for (let i = 0; i < cartList.length; i++) {
-          total += Number(cartList[i].price * cartList[i].quantity)
+            total += Number(cartList[i].price * cartList[i].quantity)
         }
         setSubTotal(total);
         setGrandTotal(total + total / 10);
-      }, [cartList])
+    }, [cartList])
 
     const handleUpdateQuantity = useCallback(() => {
         fetchData();
@@ -115,6 +116,7 @@ export default function CartPage() {
                         }
                     </tbody>
                 </table>
+                {(cartList.length === 0) && <NoProductFound />}
 
                 <table className={styles.summary} cellSpacing="20 50" cellPadding="0">
                     <thead>

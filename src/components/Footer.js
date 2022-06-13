@@ -8,7 +8,7 @@ const Footer = () => {
 		<>
 			<div className={styles.Footer}>
 				<div className={styles.Left}>
-					<h1 className={styles.Logo}>DIAMOUND CITY</h1>
+					<h1 className={styles.Logo}>DIAMOND JEWELRY</h1>
 					<p className={styles.Desc}>
 						Hội tụ và Tỏa Sáng là giá trị mà công ty DiamoundCity đem lại,
 						cùng với sự kết hợp tinh tế của trang sức đa dạng đem lại giá trị 

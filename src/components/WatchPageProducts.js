@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Product from "./Product"
 import styles from "./WatchPageProducts.module.css"
 import axios from 'axios';
+import NoProductFound from './NoProductFound';
 
 const WatchPageProducts = ({filters}) => {
 	const [products, setProducts] = useState();
@@ -25,10 +26,11 @@ const WatchPageProducts = ({filters}) => {
 		<>
 			<div className={styles.Title}>CÁC SẢN PHẨM ĐỒNG HỒ</div>
 			<div className={styles.Container}>
-			{(products && products.length === 0) ? (<div className={styles.None}>Không có sản phẩm nào phù hợp</div>)  : (products?.map((product) => (
-            	<Product product={product} key={product.id} />
-          	)))}
+			{products.map((product) => (  
+          		<Product product={product} key={product.id} />
+        	))}
 			</div>
+			{(products.length === 0) && <NoProductFound />}
 		</>
 	)
 }

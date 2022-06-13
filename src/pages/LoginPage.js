@@ -20,34 +20,90 @@ export default function Login() {
 	async function signInWithGoogle() {
 		try {
 			const googleProvider = new fbAuth.GoogleAuthProvider();
-			const oathResponse = await fbAuth2.signInWithPopup(googleProvider);
-			const userData = oathResponse.user.providerData[0];
+			const oauthResponse = await fbAuth2.signInWithPopup(googleProvider);
+			const userData = oauthResponse.user.providerData[0];
 			const response = await axios({
 				method: 'post',
-				url: process.env.REACT_APP_API_URL + "/auth/signup",
+				url: process.env.REACT_APP_API_URL + "/auth/signin/oauth2",
 				data: {
 					fullName: userData.displayName,
 					email: userData.email,
 					tel: userData.phoneNumber,
-					password: '123456',
 					provider: "GOOGLE",
 					role: "USER"
 				}
 			});
-			console.log(response);
+			if (response.status === 200) {
+				const token = response.data.token;
+				const userId = response.data.userId;
+				ls.set("accessToken", token);
+				ls.set("userId", userId);
+				navigate("/");
+			}
 		}
 		catch (error) {
 			console.log(error);
 		}
 	}
-	// function onSuccess(response) {
-	// 	localStorage.setItem("accessToken", response.accessToken);
-	// 	navigate("/");
-	// }
 
-	// function onFailure(response) {
-	// 	console.log(response);
-	// }
+	async function signInWithFacebook() {
+		try {
+			const facebookProvider = new fbAuth.FacebookAuthProvider();
+			const oauthResponse = await fbAuth2.signInWithPopup(facebookProvider);
+			const userData = oauthResponse.user.providerData[0];
+			const response = await axios({
+				method: 'post',
+				url: process.env.REACT_APP_API_URL + "/auth/signin/oauth2",
+				data: {
+					fullName: userData.displayName,
+					email: userData.email,
+					tel: userData.phoneNumber,
+					provider: "FACEBOOK",
+					role: "USER"
+				}
+			});
+			if (response.status === 200) {
+				const token = response.data.token;
+				const userId = response.data.userId;
+				ls.set("accessToken", token);
+				ls.set("userId", userId);
+				navigate("/");
+			}
+		}
+		catch (error) {
+			console.log(error);
+		}
+	}
+
+	async function signInWithGithub() {
+		try {
+			const githubProvider = new fbAuth.GithubAuthProvider();
+			const oauthResponse = await fbAuth2.signInWithPopup(githubProvider);
+			const userData = oauthResponse.user.providerData[0];
+			const response = await axios({
+				method: 'post',
+				url: process.env.REACT_APP_API_URL + "/auth/signin/oauth2",
+				data: {
+					fullName: userData.displayName,
+					email: userData.email,
+					tel: userData.phoneNumber,
+					provider: "GITHUB",
+					role: "USER"
+				}
+			});
+			if (response.status === 200) {
+				const token = response.data.token;
+				const userId = response.data.userId;
+				ls.set("accessToken", token);
+				ls.set("userId", userId);
+				navigate("/");
+			}
+		}
+		catch (error) {
+			console.log(error);
+		}
+	}
+	
 
 	async function handleFormSubmit(event) {
 		try {
@@ -88,29 +144,22 @@ export default function Login() {
 					<div className={styles.thirdpartywrapper}>
 						<div
 							className={styles.button}
-							// responseType="token"
-							// redirectUri="http://localhost:3000/auth/google/diamonjewelry"
-							// scope="profile"
 							onClick={signInWithGoogle}
 						>
 							<img className={styles.icon} src={require("../assets/images/google.png")} alt="google-icon" />
 						</div>
 						<div
 							className={styles.button}
-						// responseType="token"
-						// redirectUri="http://localhost:3000/auth/facebook/diamonjewelry"
-						// scope="public_profile"
+							onClick={signInWithFacebook}
 						>
 							<img className={styles.icon} src={require("../assets/images/facebook.png")} alt="facebook-icon" />
 						</div>
 
 						<div
 							className={styles.button}
-						// responseType="token"
-						// redirectUri="http://localhost:3000/auth/facebook/diamonjewelry"
-						// scope="public_profile"
+							onClick={signInWithGithub}
 						>
-							<img className={styles.icon} src={require("../assets/images/instagram.png")} alt="facebook-icon" />
+							<img className={styles.icon} src={require("../assets/images/github.png")} alt="github-icon" />
 						</div>
 					</div>
 				</form>
