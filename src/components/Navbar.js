@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import tvkd from 'tieng-viet-khong-dau';
 
+
 export default function Navbar() {
     const userId = ls.get("userId");
 
@@ -32,12 +33,13 @@ export default function Navbar() {
 			});
         }
     }
-    
     const navigate = useNavigate();
-    let suggestions = [];
+    const suggestions = [];
     useEffect(() => {
         async function fetchData() {
-            // const response = await axios.get()
+            const response = await axios.get(process.env.REACT_APP_API_URL + "/products/titles");
+            suggestions.push(...response.data);
+            console.log(suggestions);
         }
         fetchData();
     }, []);
@@ -48,37 +50,6 @@ export default function Navbar() {
             navigate(`/san-pham/${response.data[0].id}/${tvkd.cFriendlyURI(response.data[0].title)}`);
         }
     }
-
-    suggestions = [
-        "Dây cổ da PNJSilver",
-        "Channel",
-        "CodingLab",
-        "CodingNepal",
-        "YouTube",
-        "YouTuber",
-        "YouTube Channel",
-        "Blogger",
-        "Bollywood",
-        "Vlogger",
-        "Vechiles",
-        "Facebook",
-        "Freelancer",
-        "Facebook Page",
-        "Designer",
-        "Developer",
-        "Web Designer",
-        "Web Developer",
-        "Login Form in HTML & CSS",
-        "How to learn HTML & CSS",
-        "How to learn JavaScript",
-        "How to became Freelancer",
-        "How to became Web Designer",
-        "How to start Gaming Channel",
-        "How to start YouTube Channel",
-        "What does HTML stands for?",
-        "What does CSS stands for?",
-    ];
-
 
     return (
         <nav className={styles.menu_container}>
@@ -142,7 +113,7 @@ export default function Navbar() {
                     </li>
                     <li>
                         <Link onClick={handleDirectCartPage} to="/gio-hang">
-                            <ion-icon name="bag-handle-outline"></ion-icon>
+                            <ion-icon name="bag-handle-outline" alt="Giỏ hàng"></ion-icon>
                         </Link>
                     </li>
                 </ul>

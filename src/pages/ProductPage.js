@@ -49,20 +49,23 @@ const ProductPage = () => {
 		fetchData();
 	}, [productId]);
 
-	useEffect(async () => {
-		if (userId !== null) {
-			const response = await axios({
-				method: 'get',
-				url: process.env.REACT_APP_API_URL + `/users/existsLikedProduct/${userId}`,
-				params: {
-					productId: productId
-				},
-				headers: {
-					'Authorization': 'Bearer ' + accessToken
-				}
-			})
-			setIsLiked(response.data);
+	useEffect(() => {
+		async function fetchData() {
+			if (userId !== null) {
+				const response = await axios({
+					method: 'get',
+					url: process.env.REACT_APP_API_URL + `/users/existsLikedProduct/${userId}`,
+					params: {
+						productId: productId
+					},
+					headers: {
+						'Authorization': 'Bearer ' + accessToken
+					}
+				})
+				setIsLiked(response.data);
+			}
 		}
+		fetchData();
 	}, [productId]);
 
 	function increaseQuantity() {
