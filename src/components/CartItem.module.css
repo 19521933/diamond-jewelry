@@ -7,6 +7,16 @@ button {
 	border-bottom: 1px solid #707070;
 }
 
+.link {
+	color: black;
+	text-decoration: none;
+}
+
+.card_item_image {
+	max-width: 250px;
+	max-height: 80px;
+}
+
 .remove_button {
 	border: none;
 	background-color: white;
@@ -53,3 +63,4 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
 	-moz-appearance: textfield;
 }
+

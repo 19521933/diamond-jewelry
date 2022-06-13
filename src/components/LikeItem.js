@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styles from "./LikeItem.module.css";
+import ls from 'local-storage';
+import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faBagShopping } from "@fortawesome/free-solid-svg-icons";
 
@@ -9,13 +11,27 @@ export default function LikeItem(props) {
     currency: "VND",
   }).format(props.price);
 
-  const onRemoveButtonClick = () => {
-    console.log(props.name);
-    alert("nút xóa sản phẩm: " + props.name);
+  const userId = ls.get("userId");
+  const accessToken = ls.get("accessToken");
+
+  const handleRemoveButtonClick = () => {
+    const response = axios({
+      method: 'put',
+      url: process.env.REACT_APP_API_URL + `/users/removeLikedProduct/${userId}`,
+      data: props.id,
+      headers: {
+        'Authorization': 'Bearer ' + accessToken,
+        'Content-Type': 'application/text'}
+    }).then(props.onItem);
   };
 
-  const onPayButtonClick = () => {
-    alert("nút thêm vào giỏ hàng: " + props.name);
+  const handlePayButtonClick = () => {
+    const response = axios({
+      method: 'put',
+      url: process.env.REACT_APP_API_URL + `/carts/addItem/${userId}`,
+      data: {id: props.id, quantity: 1},
+      headers: {'Authorization': 'Bearer ' + accessToken}
+    }).then(props.onItem);
   };
 
   function Avail() {
@@ -31,14 +47,14 @@ export default function LikeItem(props) {
         <td>
           <button
             id="remove-button"
-            onClick={onRemoveButtonClick}
+            onClick={handleRemoveButtonClick}
             className={styles.remove_button}
           >
             <i className="fa fa-trash-o mr-1" />
           </button>
         </td>
         <td>
-          <img src={props.image} alt={props.name} />
+          <img className={styles.product_image} src={props.image} alt={props.name} />
         </td>
         <td>{props.name}</td>
         <td className={styles.price}>{formattedPrice}</td>
@@ -47,7 +63,7 @@ export default function LikeItem(props) {
         <td>
           <button
             id="pay-button"
-            onClick={onPayButtonClick}
+            onClick={handlePayButtonClick}
             className={styles.pay_button}
           >
             <i className="fa fa-shopping-basket mr-1" />

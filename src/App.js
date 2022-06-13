@@ -6,12 +6,12 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ContactPage from './pages/ContactPage';
 import LikePage from './pages/LikePage';
-import Product from './pages/Product';
+import ProductPage from './pages/ProductPage';
 import GiftPage from './pages/GiftPage';
 import JewelryPage from './pages/JewelryPage';
 import WatchPage from './pages/WatchPage';
 import ProfilePage from './pages/ProfilePage';
-import { productInputs, userInputs } from "./formSource";
+import { productInputs } from "./formSource";
 import "./style/dark.css";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -34,18 +34,18 @@ function App() {
 				<Route path="/trang-suc" element={<JewelryPage />} />
 				<Route path="/dong-ho" element={<WatchPage />} />
 				<Route path="/qua-tang" element={<GiftPage />} />
-				<Route path="/san-pham" element={<Product />} />
 				<Route path="/tai-khoan" element={<ProfilePage />} />
+				<Route path="/san-pham/:productId/:productTitle" element={<ProductPage />} />
 				<Route path="/admin">
 					<Route index element={<Home />} />
 					<Route path="login" element={<Login />} />
 					<Route path="users">
 						<Route index element={<UserList />} />
 						<Route path=":userId" element={<Single />} />
-						<Route
+						{/* <Route
 							path="new"
 							element={<New inputs={userInputs} title="Quản Lý Khách Hàng:" />}
-						/>
+						/> */}
 					</Route>
 					<Route path="products">
 						<Route index element={<AdminProductList />} />

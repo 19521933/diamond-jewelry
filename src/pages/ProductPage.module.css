@@ -14,10 +14,11 @@
 }
 
 .Image {
-	width: 85%;
-	height: 90%;
+	width: 80%;
+	height: 87%;
 	object-fit: cover;
 	box-shadow: 5px 5px 5px 3px #aaa;
+	margin-left: 25px;
 }
 
 .InfoContainer {
@@ -88,4 +89,38 @@
 
 Button:hover {
 	background-color: #f8f4f4;
+}
+
+.quantity_wrapper input {
+    width: 30px;
+    text-align: center;
+    padding: -8px 10px;
+    border-radius: 5px;
+}
+
+.quantity_wrapper button {
+	background-color: white;
+}
+
+.increase_button {
+	border-left: none;
+	border-top-right-radius: 28px;
+	border-bottom-right-radius: 28px;
+}
+
+.decrease_button {
+	border-right: none;
+	border-top-left-radius: 28px;
+	border-bottom-left-radius: 28px;
+}
+
+.hearticon{
+	margin-top: 25px;
+	display: flex;
+}
+
+.nameHeart{
+	font-size: 20px;
+	opacity: 80%;
+	margin: 0px 3px;
 }

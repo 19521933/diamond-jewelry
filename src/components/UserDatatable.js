@@ -1,16 +1,22 @@
 import axios from 'axios';
 import "./Datatable.css";
 import { DataGrid } from "@mui/x-data-grid";
-// import { userColumns, userRows } from "../datatablesource";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import ls from 'local-storage';
 
 const UserDatatable = () => {
 	const [data, setData] = useState([]);
 
+	const config = {
+		headers: {
+			Authorization: "Bearer " + ls.get("accessToken")
+		}
+	}
+
 	useEffect(() => {
 		async function fetchData() {
-			const users = await axios.get("http://diamondjewelry-api.herokuapp.com/api/v1/users")
+			const users = await axios.get(process.env.REACT_APP_API_URL + "/users", config);
 
 			const userRows = users.data.map((user) => ({
 				id: user.id,
@@ -28,6 +34,7 @@ const UserDatatable = () => {
 
 	const handleDelete = (id) => {
 		setData(data.filter((item) => item.id !== id));
+		axios.delete(process.env.REACT_APP_API_URL + "/users/" + id, config);
 	};
 
 	const userColumns = [
@@ -125,9 +132,9 @@ const UserDatatable = () => {
 			<div className="datatable">
 				<div className="datatableTitle">
 					Thao Tác Khách Hàng
-					<Link to="/admin/users/new" className="link">
+					{/* <Link to="/admin/users/new" className="link">
 						Thêm
-					</Link>
+					</Link> */}
 				</div>
 				<DataGrid
 					className="datagrid"

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Announcement from '../components/Announcement'
 import Footer from '../components/Footer';
 import Header from '../components/Header'
@@ -7,6 +7,14 @@ import WatchPageProducts from '../components/WatchPageProducts';
 import styles from "./WatchPage.module.css"
 
 const WatchPage = () => {
+    const [brand, setBrand] = useState();
+    const [material, setMaterial] = useState();
+    const [chainMaterial, setChainMaterial] = useState();
+    const [gender, setGender] = useState();
+    const [sortMode, setSortMode] = useState();
+
+    const filters = { brand, material, gender, chainMaterial, sortMode };
+
     return (
         <div className={styles.Container}>
             <Header />
@@ -15,50 +23,56 @@ const WatchPage = () => {
             <div className={styles.FilterContainer}>
                 <div className={styles.Filter}>
                     <span className={styles.FilterText}>Bộ lọc sản phẩm:</span>
-                    <select className={styles.Select}>
+                    <select value={brand} onChange={(e) => setBrand(e.target.value)} className={styles.Select}>
                         <option className={styles.Option} disabled selected>Thương hiệu</option>
-                        <option className={styles.Option}>PNJ</option>
-                        <option className={styles.Option}>GoldRiver</option>
-                        <option className={styles.Option}>CrystalCop</option>
+                        <option value={"CK"} className={styles.Option}>CK</option>
+                        <option value={"Casio"} className={styles.Option}>Casio</option>
+                        <option value={"Citizen"} className={styles.Option}>Citizen</option>
+                        <option value={"Fossil"} className={styles.Option}>Fossil</option>
+                        <option value={"Jacques du manoir"} className={styles.Option}>Jacques du manoir</option>
+                        <option value={"Longines"} className={styles.Option}>Longines</option>
+                        <option value={"Orient"} className={styles.Option}>Orient</option>
+                        <option value={"Michael Kors"} className={styles.Option}>Michael Kors</option>
+                        <option value={"Tissot"} className={styles.Option}>Tissot</option>
+                        <option value={"Tất cả"} className={styles.Option}>Tất cả</option>
                     </select>
 
-                    <select className={styles.Select}>
-                        <option className={styles.Option} disabled selected>Giá</option>
-                        <option className={styles.Option}>Vàng</option>
-                        <option className={styles.Option}>Bạc</option>
-                        <option className={styles.Option}>Kim Cương</option>
-                        <option className={styles.Option}>Thạch Anh</option>
+                    <select value={material} onChange={(e) => setMaterial(e.target.value)} className={styles.Select}>
+                        <option className={styles.Option} disabled selected>Chất liệu</option>
+                        <option value={"Thép Không Gỉ"} className={styles.Option}>Thép Không Gỉ</option>
+                        <option value={"Thép Không Gỉ Mạ PVD"} className={styles.Option}>Thép Không Gỉ Mạ PVD</option>
+                        <option value={"Thép cao cấp không gỉ 316L"} className={styles.Option}>Thép cao cấp không gỉ 316L</option>
+                        <option value={"Tất cả"} className={styles.Option}>Tất cả</option>
                     </select>
 
-                    <select className={styles.Select}>
+                    <select value={gender} onChange={(e) => setGender(e.target.value)} className={styles.Select}>
                         <option className={styles.Option} disabled selected>Giới tính</option>
-                        <option className={styles.Option}>Nam</option>
-                        <option className={styles.Option}>Nữ</option>
-                        <option className={styles.Option}>Khác</option>
+                        <option value={"Nam"} className={styles.Option}>Nam</option>
+                        <option value={"Nữ"} className={styles.Option}>Nữ</option>
+                        <option value={"Trẻ em"} className={styles.Option}>Trẻ em</option>
+                        <option value={"Tất cả"} className={styles.Option}>Tất cả</option>
+                        <option value={"Hiển thị tất cả"} className={styles.Option}>Hiển thị tất cả</option>
                     </select>
 
-                    <select className={styles.Select}>
+                    <select value={chainMaterial} onChange={(e) => setChainMaterial(e.target.value)} className={styles.Select}>
                         <option className={styles.Option} disabled selected>Chất liệu dây</option>
-                        <option className={styles.Option}>Dây Kim Loại</option>
-                        <option className={styles.Option}>Dây Cao Su</option>
-                        <option className={styles.Option}>Dây Da</option>
-                        <option className={styles.Option}>Dây Vải</option>
-                        <option className={styles.Option}>Dây Thép</option>
-                        <option className={styles.Option}>Dây Tổng Hợp</option>
+                        <option value={"Cao Su Cao Cấp"} className={styles.Option}>Cao Su Cao Cấp</option>
+                        <option value={"Da"} className={styles.Option}>Da</option>
+                        <option value={"Thép Không Gỉ"} className={styles.Option}>Thép Không Gỉ</option>
+                        <option value={"Tất cả"} className={styles.Option}>Tất cả</option>
                     </select>
-
                 </div>
 
                 <div className={styles.Filter}>
                     <span className={styles.FilterText}>Xắp xếp:</span>
-                    <select className={styles.Select}>
-                        <option className={styles.Option} selected>Sản phẩm mới nhất</option>
-                        <option className={styles.Option}>Sản phẩm phổ biến nhất</option>
-                        <option className={styles.Option}>Sản phẩm cũ nhất</option>
+                    <select value={sortMode} onChange={(e) => setSortMode(e.target.value)} className={styles.Select}>
+                        <option value={"latest"} className={styles.Option} selected>Sản phẩm mới nhất</option>
+                        <option value={"mostPopular"} className={styles.Option}>Sản phẩm phổ biến nhất</option>
+                        <option value={"oldest"} className={styles.Option}>Sản phẩm cũ nhất</option>
                     </select>
                 </div>
             </div>
-            <WatchPageProducts />
+            <WatchPageProducts filters={filters} />
             <Newsletter />
             <Footer />
         </div>

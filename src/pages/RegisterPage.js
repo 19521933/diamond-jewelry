@@ -11,7 +11,7 @@ export default function RegisterPage() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (ls.get("access_token")) {
+        if (ls.get("accessToken")) {
             navigate("/");
         }
     }, []);
@@ -19,12 +19,12 @@ export default function RegisterPage() {
     async function handleFormSubmit(event) {
         try {
             event.preventDefault();
-            const name = $("#name")[0].value;
+            const fullName = $("#name")[0].value;
             const dob = $("#dob")[0].value;
             const tel = $("#tel")[0].value;
             const email = $("#email")[0].value;
             const password = $("#password")[0].value;
-            const response = await axios.post(process.env.REACT_APP_API_URL + "/auth/signup", { name, dob, tel, email, password });
+            const response = await axios.post(process.env.REACT_APP_API_URL + "/auth/signup", { fullName, dob, tel, email, password });
 
             if (response.status === 200) {
                 showSuccessPopup();
@@ -53,7 +53,7 @@ export default function RegisterPage() {
     }
 
     function onSuccess(response) {
-        localStorage.setItem("access_token", response.access_token);
+        localStorage.setItem("accessToken", response.accessToken);
         navigate("/");
     }
 

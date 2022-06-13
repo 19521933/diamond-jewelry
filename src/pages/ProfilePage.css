@@ -25,6 +25,7 @@
 ::after,
 ::before {
 	box-sizing: border-box;
+	margin-bottom: 5px;
 }
 
 .bootstrap .div {
@@ -47,11 +48,11 @@
 }
 
 .bootstrap .card-body {
-	-ms-flex: 1 1 auto;
+	/* -ms-flex: 1 1 auto;
 	flex: 1 1 auto;
 	min-height: 1px;
 	padding: 1.25rem;
-	height: 500px;
+	height: 500px; */
 }
 
 .bootstrap .me-2 {

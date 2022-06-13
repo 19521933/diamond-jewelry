@@ -1,77 +1,50 @@
-import React from 'react'
+import React, { useState, useEffect, useCallback } from 'react';
 import styles from './LikePage.module.css'
-import  { useState, useEffect, useCallback } from 'react'
+import ls from 'local-storage';
+import axios from 'axios';
 import LikeItem from '../components/LikeItem'
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { PublicTwoTone } from '@material-ui/icons';
+
 
 export default function LikePage() {
-    const LikeData = {
-        items: [
-          {
-            id: 1,
-            image: "https://picsum.photos/175/120",
-            name: "Đồng hồ Bạc 1",
-            price: 765000,
-            added_day: '20/04/2022',
-            avail: true
-          },
-    
-          {
-            id: 2,
-            image:"https://picsum.photos/175/120",
-            name: "Đồng hồ Bạc 2",
-            price: 765000,
-            added_day: '19/04/2022',
-            avail: false
-          },
-    
-          {
-            id: 3,
-            image: "https://picsum.photos/175/120",
-            name: "Đồng hồ Bạc 3",
-            price: 765000,
-            added_day: '18/04/2022',
-            avail: true
-          },
+  const [likeList, setLikeList] = useState([]);
 
-          {
-            id: 4,
-            image: "https://picsum.photos/175/120",
-            name: "Đồng hồ Bạc 4",
-            price: 765000,
-            added_day: '18/04/2022',
-            avail: true
-          },
+  const userId = ls.get("userId");
+  const accessToken = ls.get("accessToken");
 
-          {
-            id: 5,
-            image: "https://picsum.photos/175/120",
-            name: "Đồng hồ Bạc 5",
-            price: 765000,
-            added_day: '18/04/2022',
-            avail: true
-          }
-        ]
-      }
+  async function fetchData() {
+    const response = await axios.get(
+      process.env.REACT_APP_API_URL + `/users/likedProducts/${userId}`,
+      { headers: { 'Authorization': 'Bearer ' + accessToken } });
+    setLikeList(response.data);
+  }
 
-      const [likeList, setLikeList] = useState(LikeData);
-
-      const [likeItem, setLikeItem] = useState('');
-
-    const onDeleteButtonClick = () => {
-      alert('Đây là nút xóa toàn bộ')
+  useEffect(() => {
+    if (userId !== undefined) {
+      fetchData();
     }
+  }, []);
 
-    const onAddButtonClick =() => {
-      alert("Đây là nút thêm vào giỏ hàng")
-    }
-       
+  // const onDeleteButtonClick = () => {
+  //   const response = axios({
+  //     method: 'put',
+  //     url: process.env.REACT_APP_API_URL + `/users/removeAllLikedProduct/${userId}`,
+  //     headers: { 'Authorization': 'Bearer ' + accessToken }
+  //   }).then(fetchData())
+  // }
+
+  // const onAddButtonClick = () => { }
+
+  const handleItem = useCallback(() => {
+    fetchData();
+  })
 
   return (
     <>
+      <Header />
       <div className={styles.like_container}>
-          <Header />
         <div className={styles.like_header}>
           <ul>
             <li>Trang chủ</li>
@@ -94,23 +67,23 @@ export default function LikePage() {
               </tr>
             </thead>
             <tbody>
-            {
-               likeList.items.map(item =>
-               <LikeItem key={item.id} id={item.id} image={item.image} name={item.name} price={item.price}
-                    avail={item.avail} added_day={item.added_day} />
-              )
-            }
+              {
+                likeList?.map(item =>
+                  <LikeItem key={item.id} id={item.id} image={item.image} name={item.title} price={item.price}
+                    avail={item.stock > 0} onItem={handleItem} />
+                )
+              }
             </tbody>
-              
+
           </table>
-          <div className={styles.div_btn}>
+          {/* <div className={styles.div_btn}>
             <button id='delete-button' className={styles.delete_button} onClick={onDeleteButtonClick}>Bỏ tất cả sản phẩm khỏi Danh sách yêu thích</button>
             <button id='add-button' className={styles.add_button} onClick={onAddButtonClick}>Thêm tất cả sản phẩm vào Giỏ hàng</button>
-          </div>
-          
+          </div> */}
+
         </div>
-        <Footer />
       </div>
+      <Footer />
     </>
   )
 }

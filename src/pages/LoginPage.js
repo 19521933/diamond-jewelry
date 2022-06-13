@@ -11,14 +11,14 @@ export default function Login() {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		if (ls.get("access_token")) {
+		if (ls.get("accessToken")) {
 			navigate("/");
 		}
 	}, []);
 
 
 	function onSuccess(response) {
-		localStorage.setItem("access_token", response.access_token);
+		localStorage.setItem("accessToken", response.accessToken);
 		navigate("/");
 	}
 
@@ -34,8 +34,10 @@ export default function Login() {
 			const response = await axios.post(process.env.REACT_APP_API_URL + "/auth/signin/user", { email, password });
 
 			if (response.status === 200) {
-				const token = response.data;
-				ls.set("access_token", token);
+				const token = response.data.token;
+				const userId = response.data.userId;
+				ls.set("accessToken", token);
+				ls.set("userId", userId);
 				navigate("/");
 			}
 		} catch (error) {
