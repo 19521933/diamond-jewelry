@@ -1,5 +1,6 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/storage';
+import 'firebase/compat/auth';
 import {getStorage} from 'firebase/storage'
 
 // Import the functions you need from the SDKs you need
@@ -23,7 +24,12 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 firebase.initializeApp(firebaseConfig);
+
 const analytics = getAnalytics(app);
 
-export const storage = getStorage(app)
-export const fbStorage = firebase.storage();
+const storage = getStorage(app)
+const fbStorage = firebase.storage();
+const fbAuth = firebase.auth;
+const fbAuth2 = firebase.default.auth();
+
+export { storage, fbStorage, fbAuth, fbAuth2 }

@@ -11,17 +11,20 @@ export default function Navbar() {
     let suggestions = [];
     useEffect(() => {
         async function fetchData() {
-            const response = await axios.get()
+            // const response = await axios.get()
         }
         fetchData();
     }, []);
 
     async function handleChange(event) {
-        const response = await axios.get(process.env.REACT_APP_API_URL + "/products/searchTitle", { params: event.target.textContent });
-        navigate(`/san-pham/${response.data.id}/${tvkd.cFriendlyURI(response.data.title)}`);
+        if (event.target.textContent !== undefined) {
+            const response = await axios.get(process.env.REACT_APP_API_URL + "/products/searchTitle", { params: { keyword: event.target.textContent } });
+            navigate(`/san-pham/${response.data[0].id}/${tvkd.cFriendlyURI(response.data[0].title)}`);
+        }
     }
 
     suggestions = [
+        "Dây cổ da PNJSilver",
         "Channel",
         "CodingLab",
         "CodingNepal",
