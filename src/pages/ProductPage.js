@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import $ from 'jquery';
 import '../components/comment.css';
+import { Link } from 'react-router-dom';
 
 const ProductPage = () => {
 	const [quantity, setQuantity] = useState(1);
@@ -48,7 +49,7 @@ const ProductPage = () => {
 		const value = parseInt(event.target.value) > 0 ? parseInt(event.target.value) : 0;
 		setQuantity(value);
 	}
-
+	let iconStyles = { color: "red", fontSize: "1.5em" };
 	return (
 		<div className={styles.Container}>
 			<Header />
@@ -72,6 +73,12 @@ const ProductPage = () => {
 								<button className={styles.increase_button} onClick={increaseQuantity}>+</button>
 							</div>
 							<button className={styles.Button}>THÊM VÀO GIỎ HÀNG</button>
+						</div>
+						<div className={styles.hearticon} >
+							<Link to="/yeu-thich">
+								<ion-icon name="heart" style={iconStyles}></ion-icon>
+							</Link>
+							<div className={styles.nameHeart}>Thêm vào danh sách yêu thích</div>
 						</div>
 					</div>
 
