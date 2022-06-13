@@ -4,6 +4,7 @@ import Comment from "./Comment.js";
 import './comment.css';
 import axios from 'axios';
 import ls from 'local-storage';
+import Swal from 'sweetalert2';
 
 const Comments = ({ productId }) => {
   const [commentList, setCommentList] = useState([]);
@@ -16,10 +17,8 @@ const Comments = ({ productId }) => {
     const response = await axios({
       method: 'get',
       url: process.env.REACT_APP_API_URL + '/ratings/productId', 
-      params: {productId: productId},
-      headers: {
-        'Authorization': 'Bearer ' + accessToken,
-      }});
+      params: {productId: productId}
+    });
     setCommentList(response.data);
 }
 
@@ -53,15 +52,28 @@ const Comments = ({ productId }) => {
   };
 
   const deleteComment = async (commentId) => {
-    const response = await axios({
-      method: 'delete',
-      url: process.env.REACT_APP_API_URL + `/ratings/${commentId}`,
-      headers: {'Authorization': 'Bearer ' + accessToken}
-  });
-    fetchData();
+    const result = await Swal.fire({
+      title: 'Bạn có muốn xóa bình luận của bạn hay không?',
+      showCancelButton: true,
+      confirmButtonText: 'Xóa',
+      cancelButtonText: `Hủy`,
+      confirmButtonColor: "#d33",
+      padding: "2em"
+    });
+    if (result.isConfirmed) {
+      const response = await axios({
+        method: 'delete',
+        url: process.env.REACT_APP_API_URL + `/ratings/${commentId}`,
+        headers: {'Authorization': 'Bearer ' + accessToken}
+      });
+      fetchData();
+    }
   };
   
   const hasCommented = () => {
+    if (userId === null) {
+      return false;
+    }
     for (let comment of commentList) {
       if (userId === comment.userId)
         return true;

@@ -1,7 +1,33 @@
 import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
+import ls from 'local-storage'
+import Swal from 'sweetalert2';
 
 export default function Navbar() {
+    const userId = ls.get("userId");
+
+    const handleDirectCartPage = (e) => {
+        if (userId == null) {
+            e.preventDefault();
+            Swal.fire({
+				icon: 'info',
+				title: 'Yêu cầu đăng nhập',
+				text: 'Bạn cần đăng nhập để vào trang giỏ hàng'
+			});
+        }
+    }
+
+    const handleDirectLikePage = (e) => {
+        if (userId == null) {
+            e.preventDefault();
+            Swal.fire({
+				icon: 'info',
+				title: 'Yêu cầu đăng nhập',
+				text: 'Bạn cần đăng nhập để vào trang yêu thích'
+			});
+        }
+    }
+
     return (
         <nav className={styles.menu_container}>
             <Link to="/" className={`${styles.menu_logo} ${styles.left_wrapper}`}>
@@ -47,12 +73,12 @@ export default function Navbar() {
                         </form>
                     </li>
                     <li>
-                        <Link to="/yeu-thich">
+                        <Link onClick={handleDirectLikePage} to="/yeu-thich">
                             <ion-icon name="heart-outline"></ion-icon>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/gio-hang">
+                        <Link onClick={handleDirectCartPage} to="/gio-hang">
                             <ion-icon name="bag-handle-outline"></ion-icon>
                         </Link>
                     </li>
