@@ -11,8 +11,6 @@ import GiftPage from './pages/GiftPage';
 import JewelryPage from './pages/JewelryPage';
 import WatchPage from './pages/WatchPage';
 import ProfilePage from './pages/ProfilePage';
-import { productInputs } from "./formSource";
-import "./style/dark.css";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import UserList from "./pages/UserList";
@@ -52,7 +50,7 @@ function App() {
 						<Route path=":productId" element={<Single />} />
 						<Route
 							path="new"
-							element={<New inputs={productInputs} title="Quản Lý Sản Phẩm:" />}
+							element={<New title="Quản Lý Sản Phẩm:" />}
 						/>
 					</Route>
 				</Route>

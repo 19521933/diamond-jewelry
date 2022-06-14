@@ -9,7 +9,7 @@ import { storage } from "../firebase/firebase";
 import axios from "axios";
 import ls from 'local-storage';
 
-const New = ({ inputs, title }) => {
+const New = ({ title }) => {
 	const [file, setFile] = useState(null);
 
 	const config = {
