@@ -6,7 +6,7 @@ import CartItem from '../components/CartItem';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import NoProductFound from '../components/NoProductFound';
-
+import Swal from 'sweetalert2';
 const cartData =
     [
         {
@@ -85,6 +85,47 @@ export default function CartPage() {
         fetchData();
     })
 
+    const handleSubmitOrder = async () => {
+        if (cartList && cartList.length > 0) {
+            const result = await Swal.fire({
+                title: 'Bạn có xác nhận đơn hàng này không?',
+                showCancelButton: true,
+                confirmButtonText: 'Xác nhận',
+                cancelButtonText: 'Hủy',
+                confirmButtonColor: "#d33",
+                padding: "2em"
+            });
+            if (result.isConfirmed) {
+                const response = await axios({
+                    method: 'post',
+                    url: process.env.REACT_APP_API_URL + `/orders`,
+                    data: {
+                        userId: userId,
+                        items: cartList.map(cartItem => {
+                            return {
+                                id: cartItem.id,
+                                quantity: cartItem.quantity
+                            }
+                        }),
+                        totalCost: grandTotal,
+                        vatFee: grandTotal - subTotal
+                    },
+                    headers: {
+                        'Authorization': 'Bearer ' + accessToken
+                    }
+                });
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: `Bạn đã xác nhận đơn hàng thành công. 
+                    Mã đơn hàng: ${response.data.id}, 
+                    Tạo vào lúc: ${response.data.createdAt}, 
+                    Địa chỉ nhận hàng: ${response.data.address}`
+                });
+            }
+        }
+    }
+
     return (
         <div className={styles.container}>
             <Header />
@@ -149,7 +190,7 @@ export default function CartPage() {
                         </tr>
                         <tr>
                             <td className={styles.center} colSpan={2}>
-                                <button>Xác nhận đặt hàng</button>
+                                <button onClick={handleSubmitOrder}>Xác nhận đặt hàng</button>
                             </td>
                         </tr>
                     </tbody>
