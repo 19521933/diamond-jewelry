@@ -5,6 +5,7 @@ import styles from './RegisterPage.module.css';
 import { ArrowLeft } from '@material-ui/icons';
 import axios from 'axios';
 import { useEffect } from 'react';
+import Swal from 'sweetalert2';
 
 export default function RegisterPage() {
     const navigate = useNavigate();
@@ -26,8 +27,9 @@ export default function RegisterPage() {
             const role = "USER";
             const provider = "LOCAL";
             const response = await axios.post(process.env.REACT_APP_API_URL + "/auth/signup", { fullName, dob, tel, email, password, role, provider });
+            console.log(response);
 
-            if (response.status === 200) {
+            if (response.status === 201) {
                 showSuccessPopup();
             }
         } catch (error) {

@@ -17,6 +17,8 @@ import UserList from "./pages/UserList";
 import AdminProductList from "./pages/AdminProductList";
 import Single from "./pages/Single";
 import New from "./pages/New";
+import OrderList from './pages/OrderList'
+import ContactList from './pages/ContactList'
 
 function App() {
 	return (
@@ -52,6 +54,12 @@ function App() {
 							path="new"
 							element={<New title="Quản Lý Sản Phẩm:" />}
 						/>
+					</Route>
+					<Route path="orders">
+						<Route index element={<OrderList />} />
+					</Route>
+					<Route path="contacts">
+						<Route index element={<ContactList />} />
 					</Route>
 				</Route>
 			</Routes>
