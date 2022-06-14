@@ -76,7 +76,6 @@ export default function LikeItem(props) {
         </td>
         <td>{props.name}</td>
         <td className={styles.price}>{formattedPrice}</td>
-        <td> {props.added_day}</td>
         <Avail isAvail={props.avail} />
         <td>
           <button

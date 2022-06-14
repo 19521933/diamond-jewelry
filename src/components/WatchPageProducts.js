@@ -5,7 +5,7 @@ import axios from 'axios';
 import NoProductFound from './NoProductFound';
 
 const WatchPageProducts = ({filters}) => {
-	const [products, setProducts] = useState();
+	const [products, setProducts] = useState([]);
 	let params = {};
 	params.group = "Đồng hồ";
 	if (filters.brand !== undefined && filters.brand !== "Tất cả") { params.brand = filters.brand; }

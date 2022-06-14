@@ -24,7 +24,7 @@ const UserDatatable = () => {
 				dob: user.dob,
 				email: user.email,
 				tel: user.tel,
-				address: user.addresses[0]
+				address: user.address
 			}));
 
 			setData(userRows);

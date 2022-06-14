@@ -123,9 +123,9 @@ const ProductPage = () => {
 				if (response.status === 200) {
 					setIsLiked(true);
 					Swal.fire({
-					icon: 'success',
-					title: 'Thành công',
-					text: 'Sản phẩm đã được thêm vào danh sách yêu thích',
+						icon: 'success',
+						title: 'Thành công',
+						text: 'Sản phẩm đã được thêm vào danh sách yêu thích',
 					});
 				}
 			}
@@ -142,9 +142,9 @@ const ProductPage = () => {
 				if (response.status === 200) {
 					setIsLiked(false);
 					Swal.fire({
-					icon: 'success',
-					title: 'Thành công',
-					text: 'Sản phẩm đã được gỡ bỏ khỏi danh sách yêu thích',
+						icon: 'success',
+						title: 'Thành công',
+						text: 'Sản phẩm đã được gỡ bỏ khỏi danh sách yêu thích',
 					});
 				}
 			}
@@ -154,11 +154,11 @@ const ProductPage = () => {
 				icon: 'info',
 				title: 'Yêu cầu đăng nhập',
 				text: 'Bạn cần đăng nhập để thêm sản phẩm vào danh sách yêu thích',
-				});
+			});
 		}
 	}
 
-let iconStyles = { color: "red", fontSize: "3em" };
+	let iconStyles = { color: "red", fontSize: "3em" };
 
 	return (
 		<div className={styles.Container}>
@@ -175,7 +175,6 @@ let iconStyles = { color: "red", fontSize: "3em" };
 						<div className={styles.Detail}>Mô tả chi tiết:</div>
 						<p id='productDescription' className={styles.Desc}>{product ? product.description : ''}</p>
 						<span id='productPrice' className={styles.Price}>{product ? product.price : ''}</span>
-
 						<div className={styles.AddContainer}>
 							<div className={styles.quantity_wrapper}>
 								<button className={styles.decrease_button} onClick={decreaseQuantity}>-</button>
@@ -189,6 +188,14 @@ let iconStyles = { color: "red", fontSize: "3em" };
 							</div>
 							<button onClick={handleAddToCartButton} className={styles.Button}>THÊM VÀO GIỎ HÀNG</button>
 						</div>
+						<div className={styles.Detail}>Thông số sản phẩm:</div>
+						{product && product.details.brand && <p id='productDescription' className={styles.Desc}>Thương hiệu: {product.details.brand}</p>}
+						{product && product.details.material && <p id='productDescription' className={styles.Desc}>Chất liệu: {product.details.material}</p>}
+						{product && product.details.chainMaterial && <p id='productDescription' className={styles.Desc}>Chất liệu dây: {product.details.chainMaterial}</p>}
+						{product && product.details.type && <p id='productDescription' className={styles.Desc}>Loại trang sức: {product.details.type}</p>}
+						{product && product.details.purity && <p id='productDescription' className={styles.Desc}>Độ tinh khiết: {product.details.purity}</p>}
+						{product && product.details.gender && <p id='productDescription' className={styles.Desc}>Giới tính: {product.details.gender}</p>}
+						{product && product.details.color && <p id='productDescription' className={styles.Desc}>Màu: {product.details.color}</p>}
 					</div>
 				</div>
 			</div>

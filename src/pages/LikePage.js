@@ -60,7 +60,6 @@ export default function LikePage() {
 								<th>Ảnh</th>
 								<th>Tên sản phẩm</th>
 								<th>Giá</th>
-								<th>Ngày thêm</th>
 								<th>Tình trạng</th>
 								<th></th>
 							</tr>
