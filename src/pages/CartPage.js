@@ -108,7 +108,7 @@ export default function CartPage() {
                             }
                         }),
                         totalCost: grandTotal,
-                        vatFee: grandTotal - subTotal
+                        VATFee: grandTotal - subTotal
                     },
                     headers: {
                         'Authorization': 'Bearer ' + accessToken
