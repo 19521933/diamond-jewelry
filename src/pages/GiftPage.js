@@ -76,7 +76,7 @@ const GiftPage = () => {
                 </div>
 
                 <div className={styles.Filter}>
-                    <span className={styles.FilterText}>Xắp xếp:</span>
+                    <span className={styles.FilterText}>Sắp xếp:</span>
                     <select value={sortMode} onChange={(e) => setSortMode(e.target.value)} className={styles.Select}>
                         <option value={"latest"} className={styles.Option} selected>Sản phẩm mới nhất</option>
                         <option value={"mostPopular"} className={styles.Option}>Sản phẩm phổ biến nhất</option>
