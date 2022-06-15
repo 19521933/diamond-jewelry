@@ -33,7 +33,7 @@ export default function Login() {
 					role: "USER"
 				}
 			});
-			if (response.status === 200) {
+			if (response.status === 200 || response.status === 201) {
 				const token = response.data.token;
 				const userId = response.data.userId;
 				ls.set("accessToken", token);
@@ -62,7 +62,7 @@ export default function Login() {
 					role: "USER"
 				}
 			});
-			if (response.status === 200) {
+			if (response.status === 200 || response.status === 201) {
 				const token = response.data.token;
 				const userId = response.data.userId;
 				ls.set("accessToken", token);
@@ -91,7 +91,7 @@ export default function Login() {
 					role: "USER"
 				}
 			});
-			if (response.status === 200) {
+			if (response.status === 200 || response.status === 201) {
 				const token = response.data.token;
 				const userId = response.data.userId;
 				ls.set("accessToken", token);
