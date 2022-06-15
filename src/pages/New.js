@@ -8,6 +8,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../firebase/firebase";
 import axios from "axios";
 import ls from 'local-storage';
+import Swal from 'sweetalert2'
 
 const New = ({ title }) => {
 	const [file, setFile] = useState(null);
@@ -50,8 +51,13 @@ const New = ({ title }) => {
 			config
 		);
 
-		if (response.status === 200) {
-			showPopup("Thêm sản phẩm mới thành công!");
+		if (response.status === 201) {
+			// showPopup("Thêm sản phẩm mới thành công!");
+			Swal.fire(
+				'Thành công!',
+				'Sản phẩm đã được thêm vào thành công.',
+				'success'
+			  )
 		}
 		else {
 			showPopup("Thêm sản phẩm mới thất bại!");
