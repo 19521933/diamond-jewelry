@@ -20,7 +20,7 @@ const ProductDatatable = () => {
 	useEffect(() => {
 		async function fetchData() {
 
-			const products = await axios.get("http://diamondjewelry-api.herokuapp.com/api/v1/products", config);
+			const products = await axios.get(process.env.REACT_APP_API_URL + "/products", config);
 
 			const productRows = products.data.map((product) => ({
 				id: product.id,
