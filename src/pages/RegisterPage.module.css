@@ -100,14 +100,14 @@
 	top: 50%;
 	transform: translate(-50%, -50%);
 	border: 1px solid black;
-    padding: 20px;
+	padding: 20px;
 }
 
 .close_button {
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translate(50%, -50%);
+	position: absolute;
+	top: 0;
+	right: 0;
+	transform: translate(50%, -50%);
 }
 
 .error_popup {
@@ -117,7 +117,7 @@
 	top: 50%;
 	transform: translate(-50%, -50%);
 	border: 1px solid black;
-    padding: 25px;
+	padding: 25px;
 	z-index: 1000;
 }
 
@@ -131,20 +131,23 @@
 	font-weight: 600;
 }
 
-.notice_error{
+.notice_error {
 	color: red;
 	font-size: 18px;
 	font-weight: 600;
 }
 
-.success_button{
+.success_button {
 	margin-bottom: 10px;
 	font-size: 25px;
 	font-weight: 600;
 	color: #6cb0c5;
 }
 
-.login_button{
+.login_button {
 	font-size: 22px;
 	font-weight: 600;
+}
+
+.error_message {
 }
