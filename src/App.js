@@ -11,14 +11,14 @@ import GiftPage from './pages/GiftPage';
 import JewelryPage from './pages/JewelryPage';
 import WatchPage from './pages/WatchPage';
 import ProfilePage from './pages/ProfilePage';
-import { productInputs } from "./formSource";
-import "./style/dark.css";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import UserList from "./pages/UserList";
 import AdminProductList from "./pages/AdminProductList";
 import Single from "./pages/Single";
 import New from "./pages/New";
+import OrderList from './pages/OrderList'
+import ContactList from './pages/ContactList'
 
 function App() {
 	return (
@@ -52,8 +52,14 @@ function App() {
 						<Route path=":productId" element={<Single />} />
 						<Route
 							path="new"
-							element={<New inputs={productInputs} title="Quản Lý Sản Phẩm:" />}
+							element={<New title="Quản Lý Sản Phẩm:" />}
 						/>
+					</Route>
+					<Route path="orders">
+						<Route index element={<OrderList />} />
+					</Route>
+					<Route path="contacts">
+						<Route index element={<ContactList />} />
 					</Route>
 				</Route>
 			</Routes>
