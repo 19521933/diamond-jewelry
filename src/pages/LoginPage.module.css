@@ -96,3 +96,7 @@
 .password_error_message {
     margin-bottom: 16px;
 }
+
+.button {
+    cursor: pointer;;
+}
