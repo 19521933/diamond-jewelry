@@ -1,129 +1,126 @@
-.Container {
-}
 .WrapperContainer {
-	display: flex;
+    display: flex;
 }
 
 .Wrapper {
-	padding: 50px;
-	display: flex;
+    padding: 50px;
+    display: flex;
 }
 
 .ImgContainer {
-	flex: 1;
+    flex: 1;
 }
 
 .Image {
-	width: 80%;
-	height: 87%;
-	object-fit: cover;
-	box-shadow: 5px 5px 5px 3px #aaa;
-	margin-left: 25px;
+    width: 80%;
+    height: 87%;
+    object-fit: cover;
+    box-shadow: 5px 5px 5px 3px #aaa;
+    margin-left: 25px;
 }
 
 .InfoContainer {
-	flex: 1;
+    flex: 1;
 }
 
 .Title {
-	font-weight: 200;
-	font-weight: bold;
-	opacity: 80%;
-	font-size: 45px;
-	margin-bottom: 15px;
-	margin-left: -2px;
+    font-weight: 200;
+    font-weight: bold;
+    opacity: 80%;
+    font-size: 45px;
+    margin-bottom: 15px;
+    margin-left: -2px;
 }
 
 .Detail {
-	font-size: 25px;
-	margin: 20px 4px;
+    font-size: 25px;
+    margin: 20px 4px;
 }
 
 .Desc {
-	margin: 10px 4px;
-	font-size: 18px;
-	opacity: 80%;
+    margin: 10px 4px;
+    font-size: 18px;
+    opacity: 80%;
 }
 
 .Price {
-	font-weight: 500;
-	font-size: 28px;
-	margin: 5px 4px;
-	color: #59a8a9;
-	opacity: 90%;
+    font-weight: 500;
+    font-size: 28px;
+    margin: 5px 4px;
+    color: #59a8a9;
+    opacity: 90%;
 }
 
 .AddContainer {
-	width: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin-top: 20px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    margin-top: 20px;
 }
 .AmountContainer {
-	display: flex;
-	align-items: center;
-	font-weight: 700;
+    display: flex;
+    align-items: center;
+    font-weight: 700;
 }
 
 .Amount {
-	width: 30px;
-	height: 30px;
-	border-radius: 5px;
-	border: 1px solid #59a8a9;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin: 0px 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #59a8a9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 5px;
 }
 
 .Button {
-	font-size: 12px;
-	padding: 8px;
-	border: 2px solid #59a8a9;
-	background-color: white;
-	cursor: pointer;
-	font-weight: 500;
+    font-size: 12px;
+    padding: 8px;
+    border: 2px solid #59a8a9;
+    background-color: white;
+    cursor: pointer;
+    font-weight: 500;
 }
 
 Button:hover {
-	background-color: #f8f4f4;
+    background-color: #f8f4f4;
+}
+
+.quantity_wrapper {
+    width: 8rem;
+}
+
+.quantity_wrapper * {
+    border: 1px solid #59a8a9;
 }
 
 .quantity_wrapper input {
-    width: 30px;
     text-align: center;
-    padding: -8px 10px;
-    border-radius: 5px;
-}
-
-.quantity_wrapper button {
-	background-color: white;
 }
 
 .increase_button {
-	border-left: none;
-	border-top-right-radius: 28px;
-	border-bottom-right-radius: 28px;
+    border-left: none;
+    border-top-right-radius: 28px;
+    border-bottom-right-radius: 28px;
 }
 
 .decrease_button {
-	border-right: none;
-	border-top-left-radius: 28px;
-	border-bottom-left-radius: 28px;
+    border-right: none;
+    border-top-left-radius: 28px;
+    border-bottom-left-radius: 28px;
 }
 
-.hearticon{
-	margin-top: 0px;
-	cursor: pointer;
+.hearticon {
+    margin-top: 0px;
+    cursor: pointer;
 }
 
-.RelatedContainer{
+.RelatedContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 20px 10px;
-
 }
 .RelatedTitle {
     justify-content: center;
@@ -133,5 +130,5 @@ Button:hover {
     margin-top: 28px;
     margin-bottom: 2px;
     color: #59a8a9;
-    font-family: 'Charis SIL', serif;
+    font-family: "Charis SIL", serif;
 }
