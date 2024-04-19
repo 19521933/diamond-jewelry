@@ -180,7 +180,7 @@ const ProductPage = () => {
                         <div className={styles.AddContainer}>
                             <div className={styles.quantity_wrapper + " input-group"}>
                                 <button class="btn btn-outline-success" type="button" onClick={decreaseQuantity}>-</button>
-                                <input type="number" value={quantity} onChange={handleChange} class="form-control" />
+                                <input type="number" value={quantity} onChange={handleChange} className="form-control" />
                                 <button class="btn btn-outline-success" type="button" onClick={increaseQuantity}>+</button>
                             </div>
 
@@ -204,7 +204,8 @@ const ProductPage = () => {
             </div>
             <Comments key={productId} productId={productId} />
             <div className={styles.RelatedTitle}>CÁC SẢN PHẨM LIÊN QUAN</div>
-            <div className={styles.RelatedContainer}>
+            {/* <div className={styles.RelatedContainer}> */}
+            <div className={"container " + styles.RelatedContainer}>
                 {relatedProducts.map((product) => (
                     <Product product={product} key={product.id} />
                 ))}
