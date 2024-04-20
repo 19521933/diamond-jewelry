@@ -1,8 +1,6 @@
 .Container {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-between;
-	/* padding: 20px 10px; */
     gap: 30px;
 }
 
