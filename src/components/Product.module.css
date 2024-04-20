@@ -10,7 +10,7 @@ background-color: #f5fbfd;
 position: relative;
 } */
 
-.Container {
+/* .Container {
     flex: 1;
     width: 15%;
     display: flex;
@@ -20,8 +20,12 @@ position: relative;
     padding: 20px 40px;
     cursor: pointer;
     margin: 0px 30px;
+} */
+
+.Container * {
+    text-decoration: none;
 }
-  
+
 .title {
     font-size: 20px;
     font-weight: 900;
@@ -30,9 +34,15 @@ position: relative;
     color: #777777;
     text-align: center;
     font-family: ui-monospace;
-    font-family: 'Charis SIL', serif;
+    font-family: "Charis SIL", serif;
+    height: 3rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
 }
-  
+
 .price {
     font-family: "Lora", serif;
     font-style: italic;
@@ -41,15 +51,15 @@ position: relative;
     color: #59a8a9;
     margin-top: 5px;
 }
-  
+
 .desc {
     text-align: center;
     color: #555;
     margin: 10px 0px;
     font-size: 20px;
 }
-  
-.Image{
+
+.Image {
     width: 350px;
     height: 350px;
     object-fit: cover;

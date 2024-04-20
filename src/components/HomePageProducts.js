@@ -5,25 +5,25 @@ import axios from 'axios';
 import NoProductFound from './NoProductFound';
 
 const HomePageProducts = () => {
-  const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await axios.get(process.env.REACT_APP_API_URL + "/products", { params: { sortMode: "mostPopular", limit: 20 } });
-      setProducts(response.data);
-    }
-    fetchData();
-  }, []);
-  return (
-    <>
-      <div className={styles.Container}>
-        {products.map((product) => (
-          <Product product={product} key={product.id} />
-        ))}
-      </div>
-	  {(products.length === 0) && <NoProductFound />}
-    </>
-  )
+    useEffect(() => {
+        async function fetchData() {
+            const response = await axios.get(process.env.REACT_APP_API_URL + "/products", { params: { sortMode: "mostPopular", limit: 20 } });
+            setProducts(response.data);
+        }
+        fetchData();
+    }, []);
+    return (
+        <>
+            <div className={"container " + styles.Container}>
+                {products.map((product) => (
+                    <Product product={product} key={product.id} />
+                ))}
+            </div>
+            {(products.length === 0) && <NoProductFound />}
+        </>
+    )
 }
 
 export default HomePageProducts
