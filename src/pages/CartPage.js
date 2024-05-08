@@ -159,10 +159,10 @@ export default function CartPage() {
                 </table>
                 {(cartList.length === 0) && <NoProductFound />}
 
-                <table className={styles.summary} cellSpacing="20 50" cellPadding="0">
+                <table className={styles.summary}>
                     <thead>
                         <tr>
-                            <th colSpan={2}>BẢNG TÓM TẮT</th>
+                            <th colSpan={2} style={{ paddingTop: '15px' }}><h5 style={{ marginBottom: '0', fontWeight: 'bold' }}>BẢNG TÓM TẮT</h5></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -170,24 +170,16 @@ export default function CartPage() {
                             <td>Tạm tính</td>
                             <td>{formattedSubTotal}</td>
                         </tr>
-                        <tr>
+                        <tr style={{ borderBottom: '1px solid black' }}>
                             <td>Thuế GTGT (10%)</td>
                             <td>{formattedVATFee}</td>
                         </tr>
-                        <tr>
-                            <td colSpan={2}>
-                                <hr />
-                            </td>
-                        </tr>
-                        <tr>
+
+                        <tr >
                             <td>Thành tiền</td>
                             <td>{formattedGrandTotal}</td>
                         </tr>
-                        <tr>
-                            <td colSpan={2}>
-                                <hr />
-                            </td>
-                        </tr>
+
                         <tr>
                             <td className={styles.center} colSpan={2}>
                                 <button onClick={handleSubmitOrder}>Xác nhận đặt hàng</button>
