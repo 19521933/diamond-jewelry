@@ -86,17 +86,17 @@ export default function CartItem(props) {
                         <img className={styles.card_item_image} src={props.image} alt={props.name} />
                     </Link>
                 </td>
-                <td>
+                <td style={{ textAlign: 'left' }}>
                     <Link className={styles.link} to={`/san-pham/${props.id}/${tvkd.cFriendlyURI(props.name)}`}>
                         {props.name}
                     </Link>
                 </td>
                 <td className={styles.price}>{formattedPrice}</td>
                 <td>
-                    <div className={styles.quantity_wrapper}>
-                        <button className={styles.decrease_button} onClick={decreaseQuantity}>-</button>
-                        <input type="number" value={quantity} onChange={handleChange} />
-                        <button className={styles.increase_button} onClick={increaseQuantity}>+</button>
+                    <div className={styles.quantity_wrapper + " input-group"}>
+                        <button class="btn btn-outline-success" type="button" onClick={decreaseQuantity}>-</button>
+                        <input type="number" value={quantity} size="10" onChange={handleChange} className="form-control" />
+                        <button class="btn btn-outline-success" type="button" onClick={increaseQuantity}>+</button>
                     </div>
                 </td>
                 <td>{formattedTotalCost}</td>
