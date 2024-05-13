@@ -90,7 +90,7 @@ const ProductPage = () => {
             const response = await axios({
                 method: 'put',
                 url: process.env.REACT_APP_API_URL + `/carts/addItem/${userId}`,
-                data: { id: productId, quantity: quantity },
+                data: { productId: productId, quantity: quantity },
                 headers: { 'Authorization': 'Bearer ' + accessToken }
             });
             if (response.status === 200) {
