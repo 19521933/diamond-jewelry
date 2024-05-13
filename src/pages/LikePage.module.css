@@ -1,6 +1,8 @@
-.like_container {
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
-
 
 .like_container table {
     width: 100%;
@@ -8,7 +10,7 @@
     text-align: center;
 }
 .like_header {
-    background-image: url('../assets/images/likepage.jpg');
+    background-image: url("../assets/images/likepage.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     padding: 50px;
@@ -38,7 +40,7 @@
     background-color: #46fcbe;
 }
 .like_detail thead th {
-    border: 1px solid black;  
+    border: 1px solid black;
 }
 
 .like_header ul {
@@ -62,6 +64,11 @@
 
 .like_header li:last-child {
     color: red;
+}
+
+.footer_container {
+    margin-top: auto;
+    margin-bottom: 0;
 }
 
 @media screen and (orientation: portrait) and (max-width: 768px) {
