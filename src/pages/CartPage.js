@@ -92,7 +92,7 @@ export default function CartPage() {
                 showCancelButton: true,
                 confirmButtonText: 'Xác nhận',
                 cancelButtonText: 'Hủy',
-                confirmButtonColor: "#d33",
+                confirmButtonColor: "#46cfbe",
                 padding: "2em"
             });
             if (result.isConfirmed) {
@@ -103,12 +103,13 @@ export default function CartPage() {
                         userId: userId,
                         items: cartList.map(cartItem => {
                             return {
-                                id: cartItem.id,
+                                productId: cartItem.id,
                                 quantity: cartItem.quantity
                             }
                         }),
                         totalCost: grandTotal,
-                        VATFee: grandTotal - subTotal
+                        VATFee: grandTotal - subTotal,
+                        createdAt: new Date().toISOString()
                     },
                     headers: {
                         'Authorization': 'Bearer ' + accessToken
@@ -122,6 +123,12 @@ export default function CartPage() {
                     Tạo vào lúc: ${response.data.createdAt}, 
                     Địa chỉ nhận hàng: ${response.data.address}`
                 });
+
+                const clearItemsResposne = await axios.put(
+                    process.env.REACT_APP_API_URL + `/carts/removeAllItems/${userId}`,
+                    null,
+                    { headers: { 'Authorization': 'Bearer ' + accessToken } });
+                setCartList(clearItemsResposne.data.items);
             }
         }
     }
