@@ -122,7 +122,7 @@ const ProductPage = () => {
                         'Content-Type': 'application/text'
                     }
                 });
-                if (response.status === 200) {
+                if (response.status === 204) {
                     setIsLiked(true);
                     Swal.fire({
                         icon: 'success',
@@ -141,7 +141,7 @@ const ProductPage = () => {
                         'Content-Type': 'application/text'
                     }
                 });
-                if (response.status === 200) {
+                if (response.status === 204) {
                     setIsLiked(false);
                     Swal.fire({
                         icon: 'success',
