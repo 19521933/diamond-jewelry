@@ -4,22 +4,23 @@ import ls from 'local-storage'
 import Swal from 'sweetalert2';
 import { Autocomplete } from '@mui/material';
 import TextField from '@mui/material/TextField';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import tvkd from 'tieng-viet-khong-dau';
 
 
 export default function Navbar() {
     const userId = ls.get("userId");
+    const [suggestions, setSuggestions] = useState([]);
 
     const handleDirectCartPage = (e) => {
         if (userId == null) {
             e.preventDefault();
             Swal.fire({
-				icon: 'info',
-				title: 'Yêu cầu đăng nhập',
-				text: 'Bạn cần đăng nhập để vào trang giỏ hàng'
-			});
+                icon: 'info',
+                title: 'Yêu cầu đăng nhập',
+                text: 'Bạn cần đăng nhập để vào trang giỏ hàng'
+            });
         }
     }
 
@@ -27,18 +28,17 @@ export default function Navbar() {
         if (userId == null) {
             e.preventDefault();
             Swal.fire({
-				icon: 'info',
-				title: 'Yêu cầu đăng nhập',
-				text: 'Bạn cần đăng nhập để vào trang yêu thích'
-			});
+                icon: 'info',
+                title: 'Yêu cầu đăng nhập',
+                text: 'Bạn cần đăng nhập để vào trang yêu thích'
+            });
         }
     }
     const navigate = useNavigate();
-    const suggestions = [];
     useEffect(() => {
         async function fetchData() {
             const response = await axios.get(process.env.REACT_APP_API_URL + "/products/titles");
-            suggestions.push(...response.data);
+            setSuggestions(response.data);
         }
         fetchData();
     }, []);
