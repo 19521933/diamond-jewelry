@@ -1,105 +1,110 @@
 .Footer {
-	display: flex;
+    display: flex;
 }
 
 .Left {
-	margin-left: 30px;
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	padding: 20px;
+    margin-left: 30px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
 }
 
 .Logo {
 }
 
 .Desc {
-	margin: 20px 0px;
-	font-family: 'Charis SIL', serif;
-	font-size: 17px;
+    margin: 20px 0px;
+    font-family: "Charis SIL", serif;
+    font-size: 17px;
 }
 
 .SocialContainer {
-	display: flex;
+    display: flex;
 }
 
 .SocialIcon {
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-	color: white;
-	/* background-color: #${(props) => props.color}; */
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin-right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: white;
+    /* background-color: #${(props) => props.color}; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
 }
 
 .Center {
-	flex: 0.5;
-	padding: 20px;
+    flex: 0.5;
+    padding: 20px;
 }
 
 .Center2 {
-	flex: 0.5;
-	padding: 20px;
+    flex: 0.5;
+    padding: 20px;
 }
 
 .Title {
-	margin-bottom: 30px;
+    margin-bottom: 30px;
 }
 
 .List {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	font-family: 'Charis SIL', serif;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: "Charis SIL", serif;
 }
 
 .ListItem {
-	width: 100%;
-	margin-bottom: 10px;
-	font-size: 17px;
-	font-family: 'Charis SIL', serif;
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 17px;
+    font-family: "Charis SIL", serif;
 }
 
 .Right {
-	flex: 1;
-	padding: 20px;
-	margin-left: 30px;
+    flex: 1;
+    padding: 20px;
+    margin-left: 30px;
 }
 
 .ContactItem {
-	margin-bottom: 20px;
-	display: flex;
-	align-items: center;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
 }
 
 .Payment {
-	width: 50%;
+    width: 50%;
 }
-
 
 .bottom {
     background-color: #46cfbe;
     color: white;
     display: flex;
     padding: 15px 50px;
+    align-items: baseline;
+}
+
+.bottom p {
+    margin: 0;
 }
 
 .bottom ul {
     list-style: none;
     margin-left: auto;
+    margin-bottom: 0;
 }
 
 .bottom li {
     display: inline;
     margin-left: 30px;
-	font-family: 'Charis SIL', serif;
+    font-family: "Charis SIL", serif;
 }
 
 .bottom li a {
     text-decoration: none;
     color: white;
-	font-family: 'Charis SIL', serif;
+    font-family: "Charis SIL", serif;
 }
