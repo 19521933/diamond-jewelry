@@ -21,7 +21,7 @@ export default function CartItem(props) {
         setQuantity(preValue => preValue + 1);
         setItemTotalCost(props.price * (quantity + 1));
 
-        updateItemQuantity(props.quantity + 1).then(props.onUpdateQuantity);
+        updateItemQuantity(quantity + 1).then(props.onUpdateQuantity);
     }
 
     function decreaseQuantity() {
@@ -29,7 +29,7 @@ export default function CartItem(props) {
             setQuantity(preValue => preValue - 1);
             setItemTotalCost(props.price * (quantity - 1));
 
-            updateItemQuantity(props.quantity - 1).then(props.onUpdateQuantity);
+            updateItemQuantity(quantity - 1).then(props.onUpdateQuantity);
         }
     }
 
@@ -44,8 +44,8 @@ export default function CartItem(props) {
     async function updateItemQuantity(quantity) {
         const response = await axios({
             method: 'put',
-            url: process.env.REACT_APP_API_URL + `/carts/addItem/${userId}`,
-            data: { id: props.id, quantity: quantity },
+            url: process.env.REACT_APP_API_URL + `/carts/updateQuantity/${userId}`,
+            data: { productId: props.id, quantity: quantity },
             headers: { 'Authorization': 'Bearer ' + accessToken }
         });
     }
