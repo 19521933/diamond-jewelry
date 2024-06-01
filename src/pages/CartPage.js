@@ -7,6 +7,8 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import NoProductFound from '../components/NoProductFound';
 import Swal from 'sweetalert2';
+import { loadStripe } from "@stripe/stripe-js";
+
 const cartData =
     [
         {
@@ -43,10 +45,15 @@ const cartData =
         },
     ]
 
+const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
+
 export default function CartPage() {
     const [cartList, setCartList] = useState([]);
     const [subTotal, setSubTotal] = useState(0);
     const [grandTotal, setGrandTotal] = useState(0);
+    const [clientSecret, setClientSecret] = useState("");
+    const [message, setMessage] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     const userId = ls.get("userId");
     const accessToken = ls.get("accessToken");
@@ -57,10 +64,35 @@ export default function CartPage() {
     const formattedGrandTotal = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(grandTotal);
 
     async function fetchData() {
-        const response = await axios.get(
+        const getCartItemsResponse = await axios.get(
             process.env.REACT_APP_API_URL + `/carts/cartItems/${userId}`,
             { headers: { 'Authorization': 'Bearer ' + accessToken } });
-        setCartList(response.data);
+        setCartList(getCartItemsResponse.data);
+
+        let total = 0;
+        for (let i = 0; i < getCartItemsResponse.data.length; i++) {
+            total += Number(getCartItemsResponse.data[i].price * getCartItemsResponse.data[i].quantity)
+        }
+
+        const createPaymentIntentResponse = await axios.post(
+            process.env.REACT_APP_API_URL + `/orders/create-payment-intent`,
+            {
+                userId: userId,
+                items: getCartItemsResponse.data.map(cartItem => {
+                    return {
+                        productId: cartItem.id,
+                        quantity: cartItem.quantity
+                    }
+                }),
+                totalCost: total + total / 10,
+                VATFee: total / 10,
+                createdAt: new Date().toISOString()
+            },
+            {
+                headers: { 'Authorization': 'Bearer ' + accessToken }
+            });
+
+        setClientSecret(createPaymentIntentResponse.clientSecret);
     }
 
     useEffect(() => {
