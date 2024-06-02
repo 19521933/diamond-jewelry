@@ -1,0 +1,40 @@
+.summary {
+    margin-left: auto;
+    margin-right: 80px;
+    background-color: #fafafa;
+    border: 1px solid #707070;
+    border-spacing: 30px;
+}
+
+.summary th {
+    color: #46cfbe;
+}
+
+.summary td {
+    padding: 10px;
+}
+
+.summary td:first-child {
+    text-align: left;
+    padding-right: 100px;
+}
+
+.summary td:last-child {
+    text-align: right;
+}
+
+.summary td[colspan] {
+    padding: 15px 0;
+}
+
+.summary button {
+    background-color: #46cfbe;
+    border: none;
+    border-radius: 18px;
+    color: white;
+    padding: 10px 30px;
+}
+
+.center {
+    text-align: center !important;
+}

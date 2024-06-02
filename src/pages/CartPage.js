@@ -6,8 +6,9 @@ import CartItem from '../components/CartItem';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import NoProductFound from '../components/NoProductFound';
-import Swal from 'sweetalert2';
 import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from '@stripe/react-stripe-js';
+import SummaryTable from '../components/SummaryTable';
 
 const cartData =
     [
@@ -52,16 +53,9 @@ export default function CartPage() {
     const [subTotal, setSubTotal] = useState(0);
     const [grandTotal, setGrandTotal] = useState(0);
     const [clientSecret, setClientSecret] = useState("");
-    const [message, setMessage] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
 
     const userId = ls.get("userId");
     const accessToken = ls.get("accessToken");
-
-    // format currency
-    const formattedSubTotal = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(subTotal);
-    const formattedVATFee = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(subTotal / 10);
-    const formattedGrandTotal = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(grandTotal);
 
     async function fetchData() {
         const getCartItemsResponse = await axios.get(
@@ -92,7 +86,7 @@ export default function CartPage() {
                 headers: { 'Authorization': 'Bearer ' + accessToken }
             });
 
-        setClientSecret(createPaymentIntentResponse.clientSecret);
+        setClientSecret(createPaymentIntentResponse.data.clientSecret);
     }
 
     useEffect(() => {
@@ -117,53 +111,9 @@ export default function CartPage() {
         fetchData();
     })
 
-    const handleSubmitOrder = async () => {
-        if (cartList && cartList.length > 0) {
-            const result = await Swal.fire({
-                title: 'Bạn có xác nhận đơn hàng này không?',
-                showCancelButton: true,
-                confirmButtonText: 'Xác nhận',
-                cancelButtonText: 'Hủy',
-                confirmButtonColor: "#46cfbe",
-                padding: "2em"
-            });
-            if (result.isConfirmed) {
-                const response = await axios({
-                    method: 'post',
-                    url: process.env.REACT_APP_API_URL + `/orders`,
-                    data: {
-                        userId: userId,
-                        items: cartList.map(cartItem => {
-                            return {
-                                productId: cartItem.id,
-                                quantity: cartItem.quantity
-                            }
-                        }),
-                        totalCost: grandTotal,
-                        VATFee: grandTotal - subTotal,
-                        createdAt: new Date().toISOString()
-                    },
-                    headers: {
-                        'Authorization': 'Bearer ' + accessToken
-                    }
-                });
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Thành công',
-                    text: `Bạn đã xác nhận đơn hàng thành công. 
-                    Mã đơn hàng: ${response.data.id}, 
-                    Tạo vào lúc: ${response.data.createdAt}, 
-                    Địa chỉ nhận hàng: ${response.data.address}`
-                });
-
-                const clearItemsResposne = await axios.put(
-                    process.env.REACT_APP_API_URL + `/carts/removeAllItems/${userId}`,
-                    null,
-                    { headers: { 'Authorization': 'Bearer ' + accessToken } });
-                setCartList(clearItemsResposne.data.items);
-            }
-        }
-    }
+    const options = {
+        clientSecret,
+    };
 
     return (
         <div className={styles.container}>
@@ -197,35 +147,12 @@ export default function CartPage() {
                     </tbody>
                 </table>
                 {(cartList.length === 0) && <NoProductFound />}
+                {clientSecret && (
+                    <Elements options={options} stripe={stripePromise}>
+                        <SummaryTable subTotal={subTotal} grandTotal={grandTotal} cartList={cartList} setCartList={setCartList} />
+                    </Elements>
+                )}
 
-                <table className={styles.summary}>
-                    <thead>
-                        <tr>
-                            <th colSpan={2} style={{ paddingTop: '15px' }}><h5 style={{ marginBottom: '0', fontWeight: 'bold' }}>BẢNG TÓM TẮT</h5></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Tạm tính</td>
-                            <td>{formattedSubTotal}</td>
-                        </tr>
-                        <tr style={{ borderBottom: '1px solid black' }}>
-                            <td>Thuế GTGT (10%)</td>
-                            <td>{formattedVATFee}</td>
-                        </tr>
-
-                        <tr >
-                            <td>Thành tiền</td>
-                            <td>{formattedGrandTotal}</td>
-                        </tr>
-
-                        <tr>
-                            <td className={styles.center} colSpan={2}>
-                                <button onClick={handleSubmitOrder}>Xác nhận đặt hàng</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
             <Footer />
         </div>
